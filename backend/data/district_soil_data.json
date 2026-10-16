@@ -1,0 +1,23 @@
+[
+  {
+    "district": "default",
+    "pH": 6.5,
+    "Nitrogen": 150,
+    "Phosphorous": 20,
+    "Potassium": 120
+  },
+  {
+    "district": "satara",
+    "pH": 6.8,
+    "Nitrogen": 140,
+    "Phosphorous": 25,
+    "Potassium": 130
+  },
+  {
+    "district": "pune",
+    "pH": 7.2,
+    "Nitrogen": 160,
+    "Phosphorous": 22,
+    "Potassium": 140
+  }
+]

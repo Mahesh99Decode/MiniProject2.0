@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harvest Simulation & Yield Predictor | KrishiMitra AI</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/animation.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/cards.css">
+</head>
+
+<body>
+
+  <!-- ASYNCHRONOUS SIDEBAR INJECTION -->
+  <div id="sidebar"></div>
+
+  <!-- MAIN SIMULATION SECTION -->
+  <main class="dashboard-main">
+
+    <!-- TOP HERO RIBBON -->
+    <header class="dashboard-hero-ribbon fade-in">
+      <div class="hero-greeting-group">
+        <h2>
+          AI Harvest & Yield Simulator <span class="wave-emoji">🧠</span>
+        </h2>
+        <div class="hero-subtitle-row">
+          <span class="farm-badge-pill">
+            ⚙️ ML Predictive Engine: Online (Port 5002)
+          </span>
+          <span class="ai-status-pulse">
+            <span class="pulse-dot"></span> Random Forest Agronomy Model
+          </span>
+        </div>
+      </div>
+
+      <div class="hero-actions-group">
+        <a href="dashboard.html" class="quick-action-pill-btn" style="background: white; color: var(--krishi-forest); border: 1.5px solid rgba(45,106,79,0.3);">
+          <span>📊</span> Dashboard
+        </a>
+      </div>
+    </header>
+
+    <!-- 2-COLUMN SIMULATION LAYOUT -->
+    <section class="dashboard-grid">
+
+      <!-- LEFT COLUMN: CONTROLS & SLIDERS -->
+      <div class="glass-card dashboard-widget fade-in">
+        <div class="card-title-row">
+          <h3><span>🎛️</span> Simulation Input Parameters</h3>
+          <span class="farm-badge-pill">Interactive Sliders</span>
+        </div>
+
+        <!-- 1. CROP SELECTION -->
+        <div class="input-field-wrapper" style="margin-bottom: 20px;">
+          <label>Target Crop for Season</label>
+          <select id="simCropSelect" class="form-input" style="padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(82, 183, 136, 0.3); font-size: 0.95rem;">
+            <option value="Wheat" selected>🌾 Wheat (Kalyansona / HD-2967)</option>
+            <option value="Mustard">🌼 Yellow Mustard (Pusa Bold)</option>
+            <option value="Soybean">🫘 Soybean (JS-335)</option>
+            <option value="Sugarcane">🎋 Sugarcane (Co-86032)</option>
+            <option value="Maize">🌽 Hybrid Maize (Sweet Corn)</option>
+          </select>
+        </div>
+
+        <!-- 2. FARM AREA SLIDER -->
+        <div class="sim-slider-row">
+          <div class="sim-slider-header">
+            <span>Farm Land Area</span>
+            <span class="sim-slider-val" id="areaValDisplay">5.0 Acres</span>
+          </div>
+          <input type="range" id="simAreaSlider" class="sim-range-slider" min="1" max="25" step="0.5" value="5" oninput="document.getElementById('areaValDisplay').innerText = this.value + ' Acres'">
+        </div>
+
+        <!-- 3. RAINFALL SLIDER -->
+        <div class="sim-slider-row">
+          <div class="sim-slider-header">
+            <span>Annual Rainfall Anticipation</span>
+            <span class="sim-slider-val" id="rainValDisplay">750 mm (Average)</span>
+          </div>
+          <input type="range" id="simRainSlider" class="sim-range-slider" min="200" max="1800" step="50" value="750" oninput="updateRainDisplay(this.value)">
+        </div>
+
+        <!-- 4. TEMPERATURE SLIDER -->
+        <div class="sim-slider-row">
+          <div class="sim-slider-header">
+            <span>Average Growing Season Temperature</span>
+            <span class="sim-slider-val" id="tempValDisplay">26 °C (Optimal)</span>
+          </div>
+          <input type="range" id="simTempSlider" class="sim-range-slider" min="15" max="42" step="1" value="26" oninput="document.getElementById('tempValDisplay').innerText = this.value + ' °C'">
+        </div>
+
+        <!-- 5. SOIL FERTILITY SELECTOR -->
+        <div class="input-field-wrapper" style="margin-bottom: 24px;">
+          <label>Soil Baseline Fertility</label>
+          <select id="simSoilSelect" class="form-input" style="padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(82, 183, 136, 0.3); font-size: 0.95rem;">
+            <option value="High" selected>High Fertility (Black Regur Soil / OC &gt; 0.7%)</option>
+            <option value="Medium">Medium Fertility (Alluvial Silt Loam)</option>
+            <option value="Low">Low Fertility (Sandy / Low Nitrogen)</option>
+          </select>
+        </div>
+
+        <!-- RUN SIMULATION BUTTON -->
+        <button id="runSimBtn" class="btn-primary full-width-btn" style="padding: 16px; font-size: 1.05rem; display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <span>⚡</span> Run ML Harvest Simulation
+        </button>
+      </div>
+
+      <!-- RIGHT COLUMN: RESULTS, REVENUE & YIELD -->
+      <div class="dashboard-right">
+
+        <!-- 1. HERO YIELD METER -->
+        <div class="sim-yield-hero-meter fade-in">
+          <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.85;">
+            Projected Total Harvest Output
+          </div>
+          <div class="sim-yield-digit" id="simHeroYield">
+            24.5 <span style="font-size: 1.6rem; font-weight: 500;">Tonnes</span>
+          </div>
+          <div class="sim-revenue-pill" id="simYieldPerAcre">
+            🌾 4.9 Tonnes / Acre (98 Qtl)
+          </div>
+        </div>
+
+        <!-- 2. FINANCIAL & RISK ANALYTICS GRID -->
+        <div class="analytics-grid fade-in" style="margin-bottom: 26px;">
+          <div class="glass-card analytics-card">
+            <div>
+              <p style="font-size: 0.8rem; color: var(--krishi-muted);">Gross Revenue Est.</p>
+              <h2 style="font-size: 1.6rem; color: var(--krishi-dark);" id="simGrossRevenue">₹5,92,900</h2>
+              <span class="kpi-pill positive" style="margin-top: 4px;">At ₹2,420/Qtl</span>
+            </div>
+            <span class="analytics-icon">💰</span>
+          </div>
+
+          <div class="glass-card analytics-card">
+            <div>
+              <p style="font-size: 0.8rem; color: var(--krishi-muted);">Net Profit Estimate</p>
+              <h2 style="font-size: 1.6rem; color: #15803D;" id="simNetProfit">₹3,48,500</h2>
+              <span class="kpi-pill positive" style="margin-top: 4px;">58.8% Profit Margin</span>
+            </div>
+            <span class="analytics-icon">📈</span>
+          </div>
+
+          <div class="glass-card analytics-card">
+            <div>
+              <p style="font-size: 0.8rem; color: var(--krishi-muted);">Climate Risk Level</p>
+              <h2 style="font-size: 1.6rem; color: #15803D;" id="simRiskScore">14%</h2>
+              <span class="kpi-pill positive" style="margin-top: 4px;">Very Safe Range</span>
+            </div>
+            <span class="analytics-icon">🛡️</span>
+          </div>
+
+          <div class="glass-card analytics-card">
+            <div>
+              <p style="font-size: 0.8rem; color: var(--krishi-muted);">Water Efficiency</p>
+              <h2 style="font-size: 1.6rem; color: #0288D1;" id="simWaterSavings">+22%</h2>
+              <span class="kpi-pill positive" style="margin-top: 4px;">Drip Optimized</span>
+            </div>
+            <span class="analytics-icon">💧</span>
+          </div>
+        </div>
+
+        <!-- 3. AI STRATEGIC RECOMMENDATIONS -->
+        <div class="glass-card dashboard-widget fade-in">
+          <div class="card-title-row">
+            <h3><span>💡</span> AI Simulation Insights</h3>
+            <span class="farm-badge-pill">Yield Maximizer</span>
+          </div>
+
+          <div class="insight-list">
+            <div class="insight-item">
+              <span>🌾</span>
+              <p id="simInsightText1">
+                Kalyansona Wheat exhibits peak nutrient uptake at 750mm rainfall. Sowing in the third week of November increases kernel weight by 8%.
+              </p>
+            </div>
+            <div class="insight-item">
+              <span>💧</span>
+              <p id="simInsightText2">
+                Drip irrigation saves ~18,000 liters of water per acre compared to furrow flooding, while preventing root rot in heavy black soil.
+              </p>
+            </div>
+            <div class="insight-item">
+              <span>📈</span>
+              <p id="simInsightText3">
+                APMC price forecast projects Wheat to appreciate to ₹2,550/Qtl near harvest season in March 2026. Staggering sales improves net revenue.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- CHATBOT WIDGET -->
+  <div id="chatbotComponent"></div>
+
+  <!-- JAVASCRIPT MODULES -->
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- SIMULATION SCRIPT -->
+  <script>
+    function updateRainDisplay(val) {
+      let desc = "Average";
+      if (val < 500) desc = "Low / Drought Risk";
+      else if (val > 1100) desc = "High / Flood Safe Required";
+      document.getElementById('rainValDisplay').innerText = `${val} mm (${desc})`;
+    }
+
+    // Connect to Flask ML API or fallback formula
+    document.getElementById("runSimBtn").addEventListener("click", async () => {
+      const btn = document.getElementById("runSimBtn");
+      btn.innerHTML = "<span>⚙️</span> Computing ML Projections...";
+      btn.disabled = true;
+
+      const crop = document.getElementById("simCropSelect").value;
+      const area = parseFloat(document.getElementById("simAreaSlider").value);
+      const rain = parseFloat(document.getElementById("simRainSlider").value);
+      const temp = parseFloat(document.getElementById("simTempSlider").value);
+      const soil = document.getElementById("simSoilSelect").value;
+
+      const cropMap = { "Wheat": 1, "Mustard": 0, "Soybean": 0, "Sugarcane": 2, "Maize": 1 };
+      const itemCode = cropMap[crop] || 0;
+
+      try {
+        const res = await fetch("http://localhost:5002/predict-yield", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            Area: 0,
+            Item: itemCode,
+            Year: 2026,
+            rainfall: rain,
+            pesticides: 100,
+            temperature: temp
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          let yieldPerHa = parseFloat(data.predicted_yield);
+          if (isNaN(yieldPerHa) || yieldPerHa <= 0) yieldPerHa = 4.8;
+
+          // Convert to tonnes for farm area
+          const yieldPerAcre = (yieldPerHa * 0.404).toFixed(2);
+          const totalYield = (yieldPerAcre * area).toFixed(1);
+
+          updateResultsUI(crop, area, totalYield, yieldPerAcre, rain, temp, soil);
+        } else {
+          fallbackSimulation(crop, area, rain, temp, soil);
+        }
+      } catch (e) {
+        console.warn("Flask ML server connection handled via internal agronomy model:", e);
+        fallbackSimulation(crop, area, rain, temp, soil);
+      } finally {
+        btn.innerHTML = "<span>⚡</span> Run ML Harvest Simulation";
+        btn.disabled = false;
+      }
+    });
+
+    function fallbackSimulation(crop, area, rain, temp, soil) {
+      let baseYieldPerAcre = 4.2; // tonnes
+      let pricePerQtl = 2420;
+
+      if (crop === 'Wheat') { baseYieldPerAcre = 4.8; pricePerQtl = 2420; }
+      else if (crop === 'Mustard') { baseYieldPerAcre = 2.4; pricePerQtl = 5680; }
+      else if (crop === 'Soybean') { baseYieldPerAcre = 2.8; pricePerQtl = 4750; }
+      else if (crop === 'Sugarcane') { baseYieldPerAcre = 32.0; pricePerQtl = 380; }
+      else if (crop === 'Maize') { baseYieldPerAcre = 5.2; pricePerQtl = 2200; }
+
+      let soilMultiplier = soil === 'High' ? 1.15 : (soil === 'Low' ? 0.85 : 1.0);
+      let rainMultiplier = (rain >= 600 && rain <= 1000) ? 1.05 : 0.92;
+
+      let yieldPerAcre = (baseYieldPerAcre * soilMultiplier * rainMultiplier).toFixed(2);
+      let totalYield = (yieldPerAcre * area).toFixed(1);
+
+      updateResultsUI(crop, area, totalYield, yieldPerAcre, rain, temp, soil);
+    }
+
+    function updateResultsUI(crop, area, totalYield, yieldPerAcre, rain, temp, soil) {
+      document.getElementById('simHeroYield').innerHTML = 
+        `${totalYield} <span style="font-size: 1.6rem; font-weight: 500;">Tonnes</span>`;
+      
+      const qtlTotal = (parseFloat(totalYield) * 10);
+      document.getElementById('simYieldPerAcre').innerHTML = 
+        `🌾 ${yieldPerAcre} Tonnes / Acre (~${(yieldPerAcre * 10).toFixed(0)} Qtl/Acre)`;
+
+      let ratePerQtl = 2420;
+      if (crop === 'Mustard') ratePerQtl = 5680;
+      else if (crop === 'Soybean') ratePerQtl = 4750;
+      else if (crop === 'Sugarcane') ratePerQtl = 380;
+      else if (crop === 'Maize') ratePerQtl = 2200;
+
+      const gross = Math.round(qtlTotal * ratePerQtl);
+      const estCost = Math.round(area * 18000);
+      const net = gross - estCost;
+
+      document.getElementById('simGrossRevenue').innerText = `₹${gross.toLocaleString('en-IN')}`;
+      document.getElementById('simNetProfit').innerText = `₹${net.toLocaleString('en-IN')}`;
+
+      // Risk score
+      let risk = 14;
+      if (rain < 450 || rain > 1300) risk += 18;
+      if (temp > 35 || temp < 18) risk += 12;
+      document.getElementById('simRiskScore').innerText = `${risk}%`;
+
+      document.getElementById('simInsightText1').innerText = 
+        `${crop} simulation on ${area} acres with ${soil} fertility produces ~${totalYield} tonnes harvest under ${rain}mm precipitation.`;
+      document.getElementById('simInsightText2').innerText = 
+        `Optimal market window: selling at projected APMC rates (~₹${ratePerQtl}/Qtl) achieves ~₹${net.toLocaleString('en-IN')} net profitability.`;
+    }
+
+    // Component Loader
+    async function loadComponent(id, file) {
+      try {
+        const res = await fetch(file);
+        if (res.ok) {
+          const html = await res.text();
+          document.getElementById(id).innerHTML = html;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function initPage() {
+      await loadComponent("sidebar", "components/sidebar.html");
+      setTimeout(() => {
+        const links = document.querySelectorAll('.sidebar-nav a');
+        links.forEach(l => {
+          if (l.getAttribute('href') === 'simulation.html') l.classList.add('active');
+        });
+      }, 100);
+
+      await loadComponent("chatbotComponent", "components/chatbotWidget.html");
+      const botScript = document.createElement("script");
+      botScript.src = "js/chatbot.js";
+      botScript.onload = () => { if (typeof initializeChatbot === 'function') initializeChatbot(); };
+      document.body.appendChild(botScript);
+    }
+
+    initPage();
+  </script>
+
+</body>
+
+</html>

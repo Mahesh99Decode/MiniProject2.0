@@ -1,0 +1,98 @@
+[
+  {
+    "id": "pm_kisan",
+    "name": "PM-KISAN Samman Nidhi",
+    "state": "All India",
+    "type": "Subsidy",
+    "category": "Income Support",
+    "description": "Direct income support scheme providing ₹6000 per year to eligible farmers in three installments.",
+    "eligibility": "Small and marginal farmers with cultivable landholding",
+    "benefits": "₹6000 per year direct bank transfer",
+    "appProcess": "Online registration through PM-Kisan portal or CSC centers",
+    "tags": ["income", "subsidy", "central", "direct benefit"]
+  },
+  {
+    "id": "pmfby",
+    "name": "Pradhan Mantri Fasal Bima Yojana (PMFBY)",
+    "state": "All India",
+    "type": "Insurance",
+    "category": "Crop Insurance",
+    "description": "Crop insurance scheme providing financial support against crop failure due to natural calamities.",
+    "eligibility": "All farmers including sharecroppers and tenant farmers",
+    "benefits": "Insurance coverage for crop loss due to drought, flood, pests",
+    "appProcess": "Apply through bank, insurance agents, or CSC centers",
+    "tags": ["insurance", "risk protection", "weather"]
+  },
+  {
+    "id": "kcc",
+    "name": "Kisan Credit Card (KCC)",
+    "state": "All India",
+    "type": "Loan Support",
+    "category": "Agricultural Credit",
+    "description": "Short-term credit support for farmers to meet agricultural and allied needs.",
+    "eligibility": "All farmers, tenant farmers, sharecroppers",
+    "benefits": "Low-interest loans for farming activities",
+    "appProcess": "Apply through banks or cooperative societies",
+    "tags": ["loan", "credit", "finance"]
+  },
+  {
+    "id": "soil_health_card",
+    "name": "Soil Health Card Scheme",
+    "state": "All India",
+    "type": "Subsidy",
+    "category": "Soil Management",
+    "description": "Provides soil health analysis and recommendations to improve crop productivity.",
+    "eligibility": "All farmers",
+    "benefits": "Free soil testing and fertilizer recommendations",
+    "appProcess": "Through agriculture department or local soil testing labs",
+    "tags": ["soil", "fertility", "analysis"]
+  },
+  {
+    "id": "maha_seed_subsidy",
+    "name": "Maharashtra Seed Subsidy Scheme",
+    "state": "Maharashtra",
+    "type": "Subsidy",
+    "category": "Input Support",
+    "description": "Subsidy on certified seeds for farmers in Maharashtra to improve crop yield.",
+    "eligibility": "Registered farmers in Maharashtra",
+    "benefits": "Up to 50% subsidy on certified seeds",
+    "appProcess": "Apply through MahaDBT portal",
+    "tags": ["seeds", "subsidy", "state"]
+  },
+  {
+    "id": "maha_irrigation",
+    "name": "Micro Irrigation Scheme Maharashtra",
+    "state": "Maharashtra",
+    "type": "Subsidy",
+    "category": "Water Management",
+    "description": "Financial assistance for drip and sprinkler irrigation systems.",
+    "eligibility": "Farmers with agricultural land in Maharashtra",
+    "benefits": "Up to 55% subsidy on irrigation systems",
+    "appProcess": "Apply via state agriculture department portal",
+    "tags": ["irrigation", "water saving", "drip"]
+  },
+  {
+    "id": "pm_kusum",
+    "name": "PM-KUSUM Scheme",
+    "state": "All India",
+    "type": "Subsidy",
+    "category": "Solar Energy",
+    "description": "Promotes solar energy use in agriculture for irrigation pumps.",
+    "eligibility": "Farmers and farmer groups",
+    "benefits": "Subsidy on solar pumps and solar power plants",
+    "appProcess": "Apply through state renewable energy agencies",
+    "tags": ["solar", "energy", "irrigation"]
+  },
+  {
+    "id": "pm_agri_infra",
+    "name": "Agriculture Infrastructure Fund",
+    "state": "All India",
+    "type": "Loan Support",
+    "category": "Infrastructure",
+    "description": "Financial support for post-harvest infrastructure and community farming assets.",
+    "eligibility": "Farmers, FPOs, cooperatives",
+    "benefits": "Low-interest loans with subsidy on interest",
+    "appProcess": "Apply via banks and NABARD-linked institutions",
+    "tags": ["infrastructure", "loan", "storage"]
+  }
+]

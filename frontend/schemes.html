@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Government Schemes & Subsidies | KrishiMitra AI</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/animation.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/cards.css">
+</head>
+
+<body>
+
+  <!-- ASYNCHRONOUS SIDEBAR INJECTION -->
+  <div id="sidebar"></div>
+
+  <!-- MAIN SCHEMES SECTION -->
+  <main class="dashboard-main">
+
+    <!-- TOP HERO RIBBON -->
+    <header class="dashboard-hero-ribbon fade-in">
+      <div class="hero-greeting-group">
+        <h2>
+          Government Support Schemes & Subsidies <span class="wave-emoji">🏛️</span>
+        </h2>
+        <div class="hero-subtitle-row">
+          <span class="farm-badge-pill">
+            🇮🇳 Ministry of Agriculture & Farmers Welfare
+          </span>
+          <span class="ai-status-pulse">
+            <span class="pulse-dot"></span> Real-Time Benefit Eligibility Matcher
+          </span>
+        </div>
+      </div>
+
+      <div class="hero-actions-group">
+        <a href="dashboard.html" class="quick-action-pill-btn" style="background: white; color: var(--krishi-forest); border: 1.5px solid rgba(45,106,79,0.3);">
+          <span>📊</span> Dashboard
+        </a>
+      </div>
+    </header>
+
+    <!-- SEARCH & FILTER CONTROLS -->
+    <section class="glass-card scheme-filters fade-in" style="padding: 20px 26px; margin-bottom: 26px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+      <div class="filter-group" style="flex: 1.5; min-width: 240px;">
+        <label style="font-size: 0.84rem; font-weight: 600; color: var(--krishi-dark);">Search Scheme Name or Keyword</label>
+        <input type="text" id="schemeSearchInput" placeholder="e.g. Solar Pump, Drip, PM-KISAN..." class="form-input" style="padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(82,183,136,0.3); width: 100%; outline: none;" oninput="filterSchemes()">
+      </div>
+
+      <div class="filter-group" style="flex: 1; min-width: 180px;">
+        <label style="font-size: 0.84rem; font-weight: 600; color: var(--krishi-dark);">Filter by Category</label>
+        <select id="schemeCategorySelect" class="form-input" style="padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(82,183,136,0.3); width: 100%;" onchange="filterSchemes()">
+          <option value="All">All Categories (6)</option>
+          <option value="Financial">Direct Financial Aid</option>
+          <option value="Irrigation">Irrigation & Solar</option>
+          <option value="Insurance">Crop Insurance</option>
+          <option value="Seed">Seeds & Inputs</option>
+        </select>
+      </div>
+
+      <div class="filter-group" style="flex: 1; min-width: 160px;">
+        <label style="font-size: 0.84rem; font-weight: 600; color: var(--krishi-dark);">State Jurisdiction</label>
+        <select id="schemeStateSelect" class="form-input" style="padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(82,183,136,0.3); width: 100%;" onchange="filterSchemes()">
+          <option value="All">All India / Central</option>
+          <option value="Maharashtra" selected>Maharashtra</option>
+          <option value="Punjab">Punjab</option>
+          <option value="Karnataka">Karnataka</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- FEATURED HERO SCHEME -->
+    <section class="glass-card featured-scheme ai-glow fade-in" style="display: flex; justify-content: space-between; align-items: center; padding: 32px; border-radius: 20px; margin-bottom: 28px; flex-wrap: wrap; gap: 20px;">
+      <div style="max-width: 700px;">
+        <span class="summary-badge" style="background: rgba(34,197,94,0.12); color: #15803D; margin-bottom: 12px;">🌟 HIGHEST ENROLLMENT SCHEME</span>
+        <h2 style="font-size: 1.8rem; font-weight: 700; color: var(--krishi-dark); margin-bottom: 8px;">
+          PM-KISAN Samman Nidhi Yojana
+        </h2>
+        <p style="font-size: 0.95rem; color: var(--krishi-slate); line-height: 1.6; margin-bottom: 14px;">
+          Direct income support of ₹6,000 per annum credited in three equal installments of ₹2,000 every 4 months directly into Aadhaar-linked bank accounts of all landholding farmer families.
+        </p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <span class="farm-badge-pill">✅ 100% DBT Transfer</span>
+          <span class="farm-badge-pill">₹6,000 / Year</span>
+          <span class="farm-badge-pill">Next Installment: Nov 2026</span>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="alert('Your Aadhaar & Land Record are verified! Status: Eligible for upcoming 18th Installment.')" style="padding: 16px 32px; font-size: 1rem;">
+        Check Your Aadhaar Status
+      </button>
+    </section>
+
+    <!-- SCHEME CARDS GRID -->
+    <section class="scheme-grid fade-in" id="schemesGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 40px;">
+
+      <!-- SCHEME 1: PM KUSUM SOLAR PUMP -->
+      <div class="glass-card scheme-card" data-category="Irrigation" style="padding: 26px; border-radius: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="scheme-top" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <span style="font-size: 2.2rem;">☀️</span>
+            <span class="farm-badge-pill" style="background: rgba(34,197,94,0.12); color: #15803D;">Up to 75% Subsidy</span>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--krishi-dark); margin-bottom: 6px;">PM-KUSUM Solar Agri-Pump Scheme</h3>
+          <p style="font-size: 0.86rem; color: var(--krishi-muted); line-height: 1.5; margin-bottom: 16px;">
+            Subsidy for standalone solar agriculture pumps (3HP to 7.5HP) replacing diesel pumps for clean off-grid irrigation.
+          </p>
+          <div class="scheme-benefits" style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px;">
+            <div style="font-size: 0.82rem; color: var(--krishi-slate);">💰 <strong>Benefit:</strong> 60% Govt subsidy + 30% Bank loan</div>
+            <div style="font-size: 0.82rem; color: var(--krishi-slate);">📜 <strong>Eligibility:</strong> Farmers with agricultural land</div>
+          </div>
+        </div>
+        <button class="btn-primary full-width-btn" onclick="alert('Application details opened. Redirecting to State Mahavitaran Solar Portal.')">
+          Apply on State Portal
+        </button>
+      </div>
+
+      <!-- SCHEME 2: PRADHAN MANTRI KRISHI SINCHAYEE YOJANA (PMKSY - DRIP) -->
+      <div class="glass-card scheme-card" data-category="Irrigation" style="padding: 26px; border-radius: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="scheme-top" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <span style="font-size: 2.2rem;">💧</span>
+            <span class="farm-badge-pill" style="background: rgba(2,136,209,0.12); color: #0288D1;">55% - 80% Subsidy</span>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--krishi-dark); margin-bottom: 6px;">Per Drop More Crop (Drip Irrigation)</h3>
+          <p style="font-size: 0.86rem; color: var(--krishi-muted); line-height: 1.5; margin-bottom: 16px;">
+            Financial subsidy for installing micro-irrigation drip and sprinkler setups to enhance water-use efficiency by up to 50%.
+          </p>
+          <div class="scheme-benefits" style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px;">
+            <div style="font-size: 0.82rem; color: var(--krishi-slate);">💰 <strong>Benefit:</strong> Up to ₹45,000 / hectare subsidy</div>
+            <div style="font-size: 0.82rem; color: var(--krishi-slate);">📜 <strong>Eligibility:</strong> All landholding cultivators</div>
+          </div>
+        </div>
+        <button class="btn-primary full-width-btn" onclick="alert('Drip Subsidy Estimator: Eligible for 70% state subsidy in Maharashtra.')">
+          View Quotation & Subsidy
+        </button>
+      </div>
+
+      <!-- SCHEME 3: PMFBY CROP INSURANCE -->
+      <div class="glass-card scheme-card" data-category="Insurance" style="padding: 26px; border-radius: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="scheme-top" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <span style="font-size: 2.2rem;">🛡️</span>
+            <span class="farm-badge-pill" style="background: rgba(245,158,11,0.12); color: #B45309;">₹1 Premium / Acre</span>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--krishi-dark); margin-bottom: 6px;">PM Fasal Bima Yojana (Crop Insurance)</h3>
+          <p style="font-size: 0.86rem; color: var(--krishi-muted); line-height: 1.5; margin-bottom: 16px;">
+            Comprehensive insurance cover against crop loss due to drought, unseasonal floods, hailstorms, pest attacks, and post-harvest damages.
+          </p>
+          <div class="scheme-benefits" style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px;">
+            <div style="font-size: 0.82rem; color: var(--krishi-slate);">💰 <strong>Premium:</strong> Only 1.5% for Rabi, 2% for Kharif</div>
+            <div style="font-size: 0.82rem; color: var(--krishi-slate);">📜 <strong>Settlement:</strong> Direct satellite claim assessment</div>
+          </div>
+        </div>
+        <button class="btn-primary full-width-btn" onclick="alert('Crop Policy Active: Covered for Wheat HD-2967 against weather anomalies.')">
+          Check Crop Policy Status
+        </button>
+      </div>
+
+      <!-- SCHEME 4: SEED & FERTILIZER SUBSIDY -->
+      <div class="glass-card scheme-card" data-category="Seed" style="padding: 26px; border-radius: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="scheme-top" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <span style="font-size: 2.2rem;">🌾</span>
+            <span class="farm-badge-pill" style="background: rgba(34,197,94,0.12); color: #15803D;">50% Seed Subsidy</span>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--krishi-dark); margin-bottom: 6px;">National Food Security Mission (NFSM)</h3>
+          <p style="font-size: 0.86rem; color: var(--krishi-muted); line-height: 1.5; margin-bottom: 16px;">
+            Certified high-yield variety seeds distributed at 50% concession through local Krishi Seva Kendras for wheat, pulses, and oilseeds.
+          </p>
+          <div class="scheme-benefits" style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px;">
+            <div style="font-size: 0.82rem; color: var(--krishi-slate);">💰 <strong>Benefit:</strong> Free seed mini-kits for pulses</div>
+            <div style="font-size: 0.82rem; color: var(--krishi-slate);">📜 <strong>Collection:</strong> Block Agriculture Office / PACS</div>
+          </div>
+        </div>
+        <button class="btn-primary full-width-btn" onclick="alert('Locating nearest certified seed distribution center in Nashik district.')">
+          Find Seed Kendra
+        </button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ASYNCHRONOUS CHATBOT WIDGET -->
+  <div id="chatbotComponent"></div>
+
+  <!-- JAVASCRIPT MODULES -->
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- SEARCH & FILTER LOGIC -->
+  <script>
+    function filterSchemes() {
+      const q = document.getElementById('schemeSearchInput').value.toLowerCase();
+      const cat = document.getElementById('schemeCategorySelect').value;
+      const cards = document.querySelectorAll('.scheme-card');
+
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        const cardCat = card.getAttribute('data-category');
+        const matchesQuery = text.includes(q);
+        const matchesCat = (cat === 'All' || cardCat === cat);
+
+        if (matchesQuery && matchesCat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Component Loader
+    async function loadComponent(id, file) {
+      try {
+        const res = await fetch(file);
+        if (res.ok) {
+          const html = await res.text();
+          document.getElementById(id).innerHTML = html;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function initPage() {
+      await loadComponent("sidebar", "components/sidebar.html");
+      setTimeout(() => {
+        const links = document.querySelectorAll('.sidebar-nav a');
+        links.forEach(l => {
+          if (l.getAttribute('href') === 'schemes.html') l.classList.add('active');
+        });
+      }, 100);
+
+      await loadComponent("chatbotComponent", "components/chatbotWidget.html");
+      const botScript = document.createElement("script");
+      botScript.src = "js/chatbot.js";
+      botScript.onload = () => { if (typeof initializeChatbot === 'function') initializeChatbot(); };
+      document.body.appendChild(botScript);
+    }
+
+    initPage();
+  </script>
+
+</body>
+
+</html>

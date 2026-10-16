@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Login | KrishiMitra AI</title>
+
+  <!-- CSS -->
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/auth.css">
+
+</head>
+
+<body>
+
+  <section class="auth-page">
+
+    <div class="auth-container glass-card fade-in">
+
+      <!-- LEFT -->
+
+      <div class="auth-left">
+
+        <div class="auth-left-content">
+
+          <span class="hero-badge">
+            Welcome Back
+          </span>
+
+          <h1>
+            Smart Farming Begins With AI
+          </h1>
+
+          <p>
+
+            Access your AI-powered agriculture dashboard,
+            crop insights, weather analysis, and smart
+            farming recommendations.
+
+          </p>
+
+          <img
+            src="assets/images/auth-farming.png"
+            alt="AI Farming"
+            class="auth-image float-animation"
+          >
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+
+      <div class="auth-right">
+
+        <div class="auth-card">
+
+          <div class="auth-header">
+
+            <h2 data-translate="login">
+              Login
+            </h2>
+
+            <p>
+              Access your farming intelligence dashboard.
+            </p>
+
+          </div>
+
+          <!-- FORM -->
+
+          <form class="auth-form" id="loginForm">
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+              <label>Email Address</label>
+
+             <input
+  type="email"
+  id="email"
+  class="form-input"
+  placeholder="Enter your email"
+  required
+>
+
+            </div>
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+              <label>Password</label>
+
+              <div class="input-wrapper">
+
+                <input
+  type="password"
+  id="password"
+  class="form-input password-input"
+  placeholder="Enter your password"
+  required
+>
+
+                <span
+                  class="password-toggle"
+                  onclick="togglePassword(this)"
+                >
+                  👁️
+                </span>
+
+              </div>
+
+            </div>
+
+            <!-- OPTIONS -->
+
+            <div class="auth-options">
+
+              <label class="remember-me">
+
+                <input type="checkbox">
+
+                Remember Me
+
+              </label>
+
+              <a href="#" class="auth-link">
+                Forgot Password?
+              </a>
+
+            </div>
+
+            <!-- BUTTON -->
+
+            <button type="submit" class="btn-primary">
+
+              Login To Dashboard
+
+            </button>
+
+            <!-- DIVIDER -->
+
+            <div class="auth-divider">
+
+              OR CONTINUE WITH
+
+            </div>
+
+            <!-- SOCIAL -->
+
+            <div class="social-auth">
+
+             <button
+  type="button"
+  class="social-btn"
+  id="googleLoginBtn"
+>
+  Google
+</button>
+
+              <button type="button" class="social-btn">
+                Phone
+              </button>
+
+            </div>
+
+          </form>
+
+          <!-- FOOTER -->
+
+          <p class="auth-footer-text">
+
+            Don’t have an account?
+
+            <a
+              href="register.html"
+              class="auth-link"
+            >
+              Register Here
+            </a>
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- JS -->
+
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+
+  <script type="module">
+
+  // Firebase Imports
+  import { initializeApp }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+  import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signInWithEmailAndPassword
+  }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  // Firebase Config
+  const firebaseConfig = {
+ apiKey: "AIzaSyDNlIRNuaDA_UwQQ2TX9Cwm9KFrd6ifCsU",
+  authDomain: "krishimitra-927a9.firebaseapp.com",
+  projectId: "krishimitra-927a9",
+  storageBucket: "krishimitra-927a9.firebasestorage.app",
+  messagingSenderId: "502833231960",
+  appId: "1:502833231960:web:22c25f857616887150b22d"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  const auth = getAuth(app);
+
+  const provider = new GoogleAuthProvider();
+
+  // ============================================
+  // GOOGLE LOGIN
+  // ============================================
+
+  const googleBtn =
+    document.getElementById("googleLoginBtn");
+
+  googleBtn.addEventListener("click", async () => {
+
+    try {
+
+      // Firebase Google Login
+      const result =
+        await signInWithPopup(auth, provider);
+
+      const user = result.user;
+
+      console.log("Google User:", user);
+
+      // Firebase Token
+      const token =
+        await user.getIdToken();
+
+      console.log("Firebase Token:", token);
+
+      // Send Token To Backend
+      const response = await fetch(
+        "http://localhost:5000/api/test/create-user",
+        {
+          method: "POST",
+
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      console.log("Backend Response:", data);
+
+      alert("Google Login Successful");
+
+      // Redirect
+      window.location.href = "dashboard.html";
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert(error.message);
+
+    }
+
+  });
+
+  // ============================================
+  // EMAIL PASSWORD LOGIN
+  // ============================================
+
+  const loginForm =
+    document.getElementById("loginForm");
+
+  loginForm.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    try {
+
+      const email =
+        document.getElementById("email").value;
+
+      const password =
+        document.getElementById("password").value;
+
+      // Firebase Email Login
+      const result =
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+      const user = result.user;
+
+      console.log("Email User:", user);
+
+      // Firebase Token
+      const token =
+        await user.getIdToken();
+
+      // Send To Backend
+      const response = await fetch(
+        "http://localhost:5000/api/test/create-user",
+        {
+          method: "POST",
+
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      console.log(data);
+
+      alert("Login Successful");
+
+      // Redirect
+      window.location.href = "dashboard.html";
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert(error.message);
+
+    }
+
+  });
+
+</script>
+
+</body>
+
+</html>
