@@ -1,59 +1,97 @@
-<aside class="dashboard-sidebar glass-card">
+<aside class="dashboard-sidebar glass-card" style="display: flex; flex-direction: column; justify-content: space-between;">
 
-  <!-- LOGO -->
-
-  <div class="sidebar-logo">
-
-    <img
-      src="assets/logos/logo.png"
-      alt="Logo"
-      class="logo"
-    >
-
-    <div>
-
-      <h3>KrishiMitra AI</h3>
-
-      <p>AI Farming System</p>
-
+  <div>
+    <!-- LOGO -->
+    <div class="sidebar-logo">
+      <img
+        src="assets/logos/logo.png"
+        alt="Logo"
+        class="logo"
+      >
+      <div>
+        <h3>KrishiMitra AI</h3>
+        <p>AI Farming System</p>
+      </div>
     </div>
 
+    <!-- NAVIGATION -->
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" id="nav-dashboard">
+        📊 Dashboard
+      </a>
+      <a href="recommendation.html" id="nav-recommendation">
+        🌱 Recommendations
+      </a>
+      <a href="monitoring.html" id="nav-monitoring">
+        📷 Monitoring
+      </a>
+      <a href="simulation.html" id="nav-simulation">
+        🧠 Simulation
+      </a>
+      <a href="schemes.html" id="nav-schemes">
+        🏛️ Schemes
+      </a>
+      <a href="alerts.html" id="nav-alerts">
+        🚨 Alerts
+      </a>
+      <a href="profile.html" id="nav-profile">
+        👤 Farmer Profile
+      </a>
+    </nav>
   </div>
 
-  <!-- NAVIGATION -->
+  <!-- SIDEBAR USER BADGE & UNIVERSAL SIGN OUT -->
+  <div class="sidebar-user-footer" style="margin-top: 32px; padding-top: 18px; border-top: 1px solid rgba(45, 106, 79, 0.15);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px;">
+      <a href="profile.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; overflow: hidden; flex: 1;">
+        <img
+          src="assets/images/farmer-avatar.png"
+          id="sidebarAvatar"
+          alt="Farmer"
+          style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid #2D6A4F; flex-shrink: 0;"
+        >
+        <div style="overflow: hidden; line-height: 1.2;">
+          <h4 id="sidebarUserName" style="font-size: 0.88rem; font-weight: 700; color: #1B4332; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Farmer</h4>
+          <p id="sidebarUserEmail" style="font-size: 0.75rem; color: #64748B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@farmer</p>
+        </div>
+      </a>
+    </div>
 
-  <nav class="sidebar-nav">
-
-    <a href="dashboard.html">
-      📊 Dashboard
-    </a>
-
-    <a href="recommendation.html">
-      🌱 Recommendations
-    </a>
-
-    <a href="monitoring.html">
-      📷 Monitoring
-    </a>
-
-    <a href="simulation.html">
-      🧠 Simulation
-    </a>
-
-    <a href="schemes.html">
-      🏛️ Schemes
-    </a>
-
-    <a href="alerts.html">
-      🚨 Alerts
-    </a>
-
-    <a href="profile.html">
-      👤 Profile
-    </a>
-
-  </nav>
-
-
+    <!-- SIGN OUT BUTTON -->
+    <button
+      type="button"
+      onclick="handleGlobalSignOut()"
+      class="btn-sidebar-signout"
+      style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 14px; background: rgba(220, 38, 38, 0.08); border: 1.5px solid rgba(220, 38, 38, 0.25); color: #B91C1C; border-radius: 10px; font-size: 0.86rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;"
+      onmouseover="this.style.background='#DC2626'; this.style.color='#FFFFFF';"
+      onmouseout="this.style.background='rgba(220, 38, 38, 0.08)'; this.style.color='#B91C1C';"
+    >
+      <span>🚪</span> Sign Out
+    </button>
+  </div>
 
 </aside>
+
+<script>
+  // Highlight active sidebar navigation link
+  (function() {
+    const currentPath = window.location.pathname;
+    const links = document.querySelectorAll('.sidebar-nav a');
+    links.forEach(link => {
+      const href = link.getAttribute('href');
+      if (currentPath.includes(href)) {
+        link.classList.add('active');
+      }
+    });
+
+    // Populate user name/avatar in sidebar from localStorage
+    const savedName = localStorage.getItem('krishimitra_user_name');
+    const savedUsername = localStorage.getItem('krishimitra_username');
+    if (savedName && document.getElementById('sidebarUserName')) {
+      document.getElementById('sidebarUserName').innerText = savedName;
+    }
+    if (savedUsername && document.getElementById('sidebarUserEmail')) {
+      document.getElementById('sidebarUserEmail').innerText = `@${savedUsername}`;
+    }
+  })();
+</script>

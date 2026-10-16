@@ -41,21 +41,26 @@
         </a>
       </li>
 
+      <li>
+        <a href="profile.html">
+          Profile
+        </a>
+      </li>
+
     </ul>
 
-    <div class="nav-actions">
+    <div class="nav-actions" id="navAuthSection">
 
       <select id="languageSwitcher">
-
         <option value="en">EN</option>
         <option value="hi">हिंदी</option>
         <option value="mr">मराठी</option>
-
       </select>
 
       <a
         href="login.html"
         class="btn-secondary"
+        id="navLoginBtn"
         data-translate="login"
       >
         Login
@@ -70,3 +75,47 @@
   </div>
 
 </nav>
+
+<script>
+  (function() {
+    const token = localStorage.getItem("krishimitra_token");
+    const userName = localStorage.getItem("krishimitra_user_name");
+    const navAuth = document.getElementById("navAuthSection");
+
+    if (token && navAuth) {
+      const loginBtn = document.getElementById("navLoginBtn");
+      if (loginBtn) {
+        loginBtn.remove();
+
+        const profilePill = document.createElement("a");
+        profilePill.href = "profile.html";
+        profilePill.className = "btn-secondary";
+        profilePill.style.display = "inline-flex";
+        profilePill.style.alignItems = "center";
+        profilePill.style.gap = "6px";
+        profilePill.style.padding = "8px 16px";
+        profilePill.innerHTML = `<span>👤</span> ${userName || "Farmer"}`;
+
+        const signOutPill = document.createElement("button");
+        signOutPill.type = "button";
+        signOutPill.className = "btn-secondary";
+        signOutPill.style.cursor = "pointer";
+        signOutPill.style.color = "#DC2626";
+        signOutPill.style.borderColor = "rgba(220, 38, 38, 0.3)";
+        signOutPill.style.background = "rgba(220, 38, 38, 0.08)";
+        signOutPill.innerHTML = `<span>🚪</span> Sign Out`;
+        signOutPill.onclick = function() {
+          localStorage.removeItem("krishimitra_token");
+          localStorage.removeItem("krishimitra_user_id");
+          localStorage.removeItem("krishimitra_user_email");
+          localStorage.removeItem("krishimitra_user_name");
+          localStorage.removeItem("krishimitra_username");
+          window.location.href = "login.html";
+        };
+
+        navAuth.appendChild(profilePill);
+        navAuth.appendChild(signOutPill);
+      }
+    }
+  })();
+</script>

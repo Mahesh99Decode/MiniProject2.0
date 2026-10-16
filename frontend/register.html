@@ -81,6 +81,23 @@
 
           <form class="auth-form" id="registerForm">
 
+            <!-- USERNAME -->
+
+            <div class="form-group">
+
+              <label>Username (3-20 chars: letters, numbers, _)</label>
+
+              <input
+                type="text"
+                id="username"
+                name="username"
+                class="form-input"
+                placeholder="e.g. farmer_rajesh"
+                required
+              >
+
+            </div>
+
             <!-- NAME -->
 
             <div class="form-group">
@@ -89,6 +106,7 @@
 
               <input
                 type="text"
+                id="name"
                 class="form-input"
                 placeholder="Enter your full name"
                 required
@@ -100,12 +118,13 @@
 
             <div class="form-group">
 
-              <label>Phone Number</label>
+              <label>Phone Number (10 digits)</label>
 
               <input
                 type="tel"
+                id="phone"
                 class="form-input"
-                placeholder="Enter phone number"
+                placeholder="e.g. 9876543210"
                 required
               >
 
@@ -119,8 +138,9 @@
 
               <input
                 type="email"
+                id="email"
                 class="form-input"
-                placeholder="Enter your email"
+                placeholder="Enter your email (e.g. farmer@example.com)"
                 required
               >
 
@@ -130,14 +150,15 @@
 
             <div class="form-group">
 
-              <label>Password</label>
+              <label>Password (min 6 chars, letters & numbers)</label>
 
               <div class="input-wrapper">
 
                 <input
                   type="password"
+                  id="password"
                   class="form-input password-input"
-                  placeholder="Create password"
+                  placeholder="Create strong password"
                   required
                 >
 

@@ -593,20 +593,29 @@
         .then(res => res.json())
         .then(user => {
           if (user && user.name) {
+            localStorage.setItem('krishimitra_user_name', user.name);
             document.getElementById('welcomeFarmerText').innerHTML = 
               `${greetingTime}, ${user.name} <span class="wave-emoji">👋</span>`;
-          } else {
-            document.getElementById('welcomeFarmerText').innerHTML = 
-              `${greetingTime}, Rajesh Patil <span class="wave-emoji">👋</span>`;
+
+            const sbName = document.getElementById('sidebarUserName');
+            if (sbName) sbName.innerText = user.name;
+          }
+          if (user && user.username) {
+            localStorage.setItem('krishimitra_username', user.username);
+            const sbUser = document.getElementById('sidebarUserEmail');
+            if (sbUser) sbUser.innerText = `@${user.username}`;
           }
           if (user && user.photoURL) {
             const avatar = document.getElementById('dashboardProfileAvatar');
             if (avatar) avatar.src = user.photoURL;
+            const sbAvatar = document.getElementById('sidebarAvatar');
+            if (sbAvatar) sbAvatar.src = user.photoURL;
           }
         })
         .catch(() => {
+          const savedName = localStorage.getItem('krishimitra_user_name') || 'Farmer';
           document.getElementById('welcomeFarmerText').innerHTML = 
-            `${greetingTime}, Rajesh Patil <span class="wave-emoji">👋</span>`;
+            `${greetingTime}, ${savedName} <span class="wave-emoji">👋</span>`;
         });
     }
 

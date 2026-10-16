@@ -81,19 +81,19 @@
 
           <form class="auth-form" id="loginForm">
 
-            <!-- EMAIL -->
+            <!-- USERNAME OR EMAIL -->
 
             <div class="form-group">
 
-              <label>Email Address</label>
+              <label>Username or Email Address</label>
 
-             <input
-  type="email"
-  id="email"
-  class="form-input"
-  placeholder="Enter your email"
-  required
->
+              <input
+                type="text"
+                id="email"
+                class="form-input"
+                placeholder="Enter username (e.g. rajesh_patil) or email"
+                required
+              >
 
             </div>
 
@@ -101,17 +101,17 @@
 
             <div class="form-group">
 
-              <label>Password</label>
+              <label>Password (min 6 chars)</label>
 
               <div class="input-wrapper">
 
                 <input
-  type="password"
-  id="password"
-  class="form-input password-input"
-  placeholder="Enter your password"
-  required
->
+                  type="password"
+                  id="password"
+                  class="form-input password-input"
+                  placeholder="Enter your password"
+                  required
+                >
 
                 <span
                   class="password-toggle"
@@ -150,32 +150,6 @@
 
             </button>
 
-            <!-- DIVIDER -->
-
-            <div class="auth-divider">
-
-              OR CONTINUE WITH
-
-            </div>
-
-            <!-- SOCIAL -->
-
-            <div class="social-auth">
-
-             <button
-  type="button"
-  class="social-btn"
-  id="googleLoginBtn"
->
-  Google
-</button>
-
-              <button type="button" class="social-btn">
-                Phone
-              </button>
-
-            </div>
-
           </form>
 
           <!-- FOOTER -->
@@ -207,161 +181,6 @@
   <script src="js/utils.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/app.js"></script>
-
-  <script type="module">
-
-  // Firebase Imports
-  import { initializeApp }
-  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-  import {
-    getAuth,
-    GoogleAuthProvider,
-    signInWithPopup,
-    signInWithEmailAndPassword
-  }
-  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-  // Firebase Config
-  const firebaseConfig = {
- apiKey: "AIzaSyDNlIRNuaDA_UwQQ2TX9Cwm9KFrd6ifCsU",
-  authDomain: "krishimitra-927a9.firebaseapp.com",
-  projectId: "krishimitra-927a9",
-  storageBucket: "krishimitra-927a9.firebasestorage.app",
-  messagingSenderId: "502833231960",
-  appId: "1:502833231960:web:22c25f857616887150b22d"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-
-  const auth = getAuth(app);
-
-  const provider = new GoogleAuthProvider();
-
-  // ============================================
-  // GOOGLE LOGIN
-  // ============================================
-
-  const googleBtn =
-    document.getElementById("googleLoginBtn");
-
-  googleBtn.addEventListener("click", async () => {
-
-    try {
-
-      // Firebase Google Login
-      const result =
-        await signInWithPopup(auth, provider);
-
-      const user = result.user;
-
-      console.log("Google User:", user);
-
-      // Firebase Token
-      const token =
-        await user.getIdToken();
-
-      console.log("Firebase Token:", token);
-
-      // Send Token To Backend
-      const response = await fetch(
-        "http://localhost:5000/api/test/create-user",
-        {
-          method: "POST",
-
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      const data = await response.json();
-
-      console.log("Backend Response:", data);
-
-      alert("Google Login Successful");
-
-      // Redirect
-      window.location.href = "dashboard.html";
-
-    } catch (error) {
-
-      console.log(error);
-
-      alert(error.message);
-
-    }
-
-  });
-
-  // ============================================
-  // EMAIL PASSWORD LOGIN
-  // ============================================
-
-  const loginForm =
-    document.getElementById("loginForm");
-
-  loginForm.addEventListener("submit", async (e) => {
-
-    e.preventDefault();
-
-    try {
-
-      const email =
-        document.getElementById("email").value;
-
-      const password =
-        document.getElementById("password").value;
-
-      // Firebase Email Login
-      const result =
-        await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-      const user = result.user;
-
-      console.log("Email User:", user);
-
-      // Firebase Token
-      const token =
-        await user.getIdToken();
-
-      // Send To Backend
-      const response = await fetch(
-        "http://localhost:5000/api/test/create-user",
-        {
-          method: "POST",
-
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      const data = await response.json();
-
-      console.log(data);
-
-      alert("Login Successful");
-
-      // Redirect
-      window.location.href = "dashboard.html";
-
-    } catch (error) {
-
-      console.log(error);
-
-      alert(error.message);
-
-    }
-
-  });
-
-</script>
 
 </body>
 
