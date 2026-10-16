@@ -2,626 +2,426 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Crop Recommendations | KrishiMitra AI</title>
 
-  <!-- CSS -->
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
 
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/animation.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/dashboard.css">
-
+  <link rel="stylesheet" href="css/cards.css">
 </head>
 
 <body>
 
-  <!-- SIDEBAR -->
-
+  <!-- ASYNCHRONOUS SIDEBAR INJECTION -->
   <div id="sidebar"></div>
 
-  <!-- MAIN -->
-
+  <!-- MAIN CONTENT -->
   <main class="dashboard-main">
 
-    <!-- HEADER -->
-
-    <header class="dashboard-topbar glass-card">
-
-      <div>
-
+    <!-- TOP HERO RIBBON -->
+    <header class="dashboard-hero-ribbon fade-in">
+      <div class="hero-greeting-group">
         <h2>
-          AI Crop Recommendations 🌱
+          AI Crop Recommendation Studio <span class="wave-emoji">🌱</span>
         </h2>
-
-        <p class="text-soft">
-
-          Personalized crop suggestions powered by
-          AI-driven agricultural intelligence.
-
-        </p>
-
+        <div class="hero-subtitle-row">
+          <span class="farm-badge-pill" id="recLocationPill">
+            📍 Nashik, Maharashtra • Auto-Detected
+          </span>
+          <span class="ai-status-pulse">
+            <span class="pulse-dot"></span> Season: Rabi 2026 • Optimal Sowing Window
+          </span>
+        </div>
       </div>
 
+      <div class="hero-actions-group">
+        <button id="allowLocationBtn" class="quick-action-pill-btn" style="background: white; color: var(--krishi-forest); border: 1.5px solid rgba(45,106,79,0.3);">
+          <span>📡</span> Re-Detect GPS
+        </button>
+        <a href="dashboard.html" class="quick-action-pill-btn">
+          <span>📊</span> Back to Dashboard
+        </a>
+      </div>
     </header>
 
+    <!-- LIVE WEATHER CARD WRAPPER -->
+    <div id="weatherSectionWrapper" class="fade-in" style="margin-bottom: 24px;">
+      <div id="weatherSection"></div>
+    </div>
 
-    <!-- FILTERS -->
-    <div class="recommendation-container">
+    <!-- FARM PROFILE & SOIL PARAMETERS STUDIO -->
+    <section class="recommendation-studio-card fade-in">
+      <div class="card-title-row">
+        <h3><span>📋</span> Farm Profile & Soil Parameters</h3>
+        <span class="farm-badge-pill" style="background: rgba(34,197,94,0.12); color: #16A34A;">AI Assisted</span>
+      </div>
 
-      <h1>AI Crop Recommendation</h1>
+      <!-- Quick Preset Selector -->
+      <p style="font-size: 0.85rem; color: var(--krishi-muted); margin-bottom: 10px;">Quick Presets for Fast Matching:</p>
+      <div class="crop-preset-pills">
+        <button class="preset-pill active" onclick="applyPreset('wheat', this)">🌾 Wheat (Black Soil / Irrigated)</button>
+        <button class="preset-pill" onclick="applyPreset('mustard', this)">🌼 Mustard (Sandy Loam / Medium Water)</button>
+        <button class="preset-pill" onclick="applyPreset('chana', this)">🌰 Chickpea / Chana (Alluvial / Rainfed)</button>
+        <button class="preset-pill" onclick="applyPreset('soybean', this)">🫘 Soybean (Clay Loam / High Organic)</button>
+      </div>
 
-      <!-- LOCATION -->
-      <div id="locationSection">
-        <div id="locationModal" class="modal">
+      <!-- Form Inputs Grid -->
+      <div class="farm-form-glass-grid">
+        <div class="input-field-wrapper">
+          <label for="landSize">Land Size (Acres)</label>
+          <input type="number" id="landSize" value="5.0" min="0.5" step="0.5" required>
+        </div>
 
-          <div class="modal-content">
+        <div class="input-field-wrapper">
+          <label for="soilType">Soil Type</label>
+          <select id="soilType" required>
+            <option value="Black" selected>Black Regur Soil (Ideal for Wheat/Cotton)</option>
+            <option value="Alluvial">Alluvial Soil (Highly Fertile River Plains)</option>
+            <option value="Red">Red & Yellow Loam</option>
+            <option value="White">Sandy / Silt Loam</option>
+            <option value="Laterite">Laterite Soil</option>
+          </select>
+        </div>
 
-            <h2>📍 Enable Location</h2>
+        <div class="input-field-wrapper">
+          <label for="waterAvail">Water Availability</label>
+          <select id="waterAvail" required>
+            <option value="High" selected>High (Canal / Drip Tube-well)</option>
+            <option value="Medium">Medium (Seasonal / Borewell)</option>
+            <option value="Low">Low (Rainfed Only)</option>
+          </select>
+        </div>
 
-            <p>
-              We use your location for:
-            </p>
+        <div class="input-field-wrapper">
+          <label for="budgetLevel">Investment Budget</label>
+          <select id="budgetLevel" required>
+            <option value="High">High (Commercial Seeds & Sprayers)</option>
+            <option value="Medium" selected>Medium (Standard Farm Inputs)</option>
+            <option value="Low">Low (Cost-effective Organic)</option>
+          </select>
+        </div>
 
-            <ul>
-              <li>Weather intelligence</li>
-              <li>Soil analysis</li>
-              <li>Regional crop recommendations</li>
-            </ul>
+        <div class="input-field-wrapper">
+          <label for="prefLang">Advisory Language</label>
+          <select id="prefLang" required>
+            <option value="English" selected>English</option>
+            <option value="Hindi">Hindi (हिंदी)</option>
+            <option value="Marathi">Marathi (मराठी)</option>
+          </select>
+        </div>
+      </div>
 
-            <button id="allowLocationBtn">
-              Allow Location
-            </button>
-
+      <!-- Soil Lab Data Section -->
+      <div style="background: #F8FAF8; border: 1px solid rgba(82, 183, 136, 0.2); border-radius: 16px; padding: 20px; margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+          <strong style="font-size: 0.92rem; color: var(--krishi-dark);">Soil Lab Telemetry (NPK & pH):</strong>
+          <div style="display: flex; gap: 16px;">
+            <label style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.84rem; cursor: pointer;">
+              <input type="radio" name="hasSoilData" value="no" checked> AI Geo-Estimation
+            </label>
+            <label style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.84rem; cursor: pointer;">
+              <input type="radio" name="hasSoilData" value="yes"> Enter Lab Card
+            </label>
           </div>
+        </div>
 
+        <!-- Manual NPK Inputs (toggleable) -->
+        <div id="soilManualInputs" style="display: none; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 14px;">
+          <div class="input-field-wrapper">
+            <label for="soilPh" style="font-size: 0.8rem;">pH Level</label>
+            <input type="number" id="soilPh" value="6.8" step="0.1" placeholder="e.g. 6.8">
+          </div>
+          <div class="input-field-wrapper">
+            <label for="soilN" style="font-size: 0.8rem;">Nitrogen (N)</label>
+            <input type="number" id="soilN" value="142" placeholder="kg/ha">
+          </div>
+          <div class="input-field-wrapper">
+            <label for="soilP" style="font-size: 0.8rem;">Phosphorus (P)</label>
+            <input type="number" id="soilP" value="48" placeholder="kg/ha">
+          </div>
+          <div class="input-field-wrapper">
+            <label for="soilK" style="font-size: 0.8rem;">Potassium (K)</label>
+            <input type="number" id="soilK" value="198" placeholder="kg/ha">
+          </div>
+        </div>
+
+        <div id="soilAutoBadge" style="display: flex; align-items: center; gap: 10px; font-size: 0.84rem; color: var(--krishi-forest);">
+          <span>🤖</span>
+          <span>KrishiMitra will utilize real-time Soil Health Registry data for your district.</span>
         </div>
       </div>
 
-      <!-- WEATHER -->
-      <div id="weatherSectionWrapper">
-        <div class="section-label">
-          <span class="section-label-icon">🌤️</span>
-          <span>Live Weather Intelligence</span>
-        </div>
-        <div id="weatherSection"></div>
-      </div>
-
-      <!-- FARM & SOIL DETAILS -->
-      <div id="farmProfileWrapper">
-        <div class="section-label">
-          <span class="section-label-icon">🌱</span>
-          <span>Farm & Soil Profile</span>
-        </div>
-        
-        <div class="farm-form-card glass-card">
-          <div class="form-grid">
-            
-            <!-- Land Size -->
-            <div class="form-group">
-              <label for="landSize">Land Size (Acres)</label>
-              <input type="number" id="landSize" placeholder="e.g. 2.5" min="0.1" step="0.1" required>
-            </div>
-
-            <!-- Soil Type -->
-            <div class="form-group">
-              <label for="soilType">Soil Type</label>
-              <div class="custom-select-wrapper">
-                <select id="soilType" required>
-                  <option value="" disabled selected>Select Soil Type</option>
-                  <option value="Black">Black Soil</option>
-                  <option value="White">White / Sandy Soil</option>
-                  <option value="Red">Red Soil</option>
-                  <option value="Alluvial">Alluvial Soil</option>
-                  <option value="Laterite">Laterite Soil</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Water Availability -->
-            <div class="form-group">
-              <label for="waterAvail">Water Availability</label>
-              <div class="custom-select-wrapper">
-                <select id="waterAvail" required>
-                  <option value="" disabled selected>Select Level</option>
-                  <option value="High">High (Abundant)</option>
-                  <option value="Medium">Medium (Seasonal)</option>
-                  <option value="Low">Low (Scarce)</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Budget Level -->
-            <div class="form-group">
-              <label for="budgetLevel">Budget Level</label>
-              <div class="custom-select-wrapper">
-                <select id="budgetLevel" required>
-                  <option value="" disabled selected>Select Budget</option>
-                  <option value="High">High (Commercial)</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Low">Low (Subsistence)</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Preferred Language -->
-            <div class="form-group">
-              <label for="prefLang">Preferred Language</label>
-              <div class="custom-select-wrapper">
-                <select id="prefLang" required>
-                  <option value="English" selected>English</option>
-                  <option value="Hindi">Hindi (हिंदी)</option>
-                </select>
-              </div>
-            </div>
-
-          </div> <!-- /form-grid -->
-
-          <!-- Soil Data Section -->
-          <div class="soil-data-section">
-            <label class="toggle-label">Do you have exact soil lab data? (pH, N, P, K)</label>
-            <div class="radio-group">
-              <label class="radio-btn">
-                <input type="radio" name="hasSoilData" value="yes">
-                <span>Yes, I have data</span>
-              </label>
-              <label class="radio-btn">
-                <input type="radio" name="hasSoilData" value="no" checked>
-                <span>No, use AI estimates</span>
-              </label>
-            </div>
-
-            <!-- Auto-Fetch Badge (Default state) -->
-            <div id="soilAutoBadge" class="soil-badge">
-              <span class="badge-icon">🤖</span>
-              <div>
-                <strong>AI Soil Intelligence</strong>
-                <p>We will fetch estimated soil health data based on your geographic location.</p>
-              </div>
-            </div>
-
-            <!-- Manual NPK Inputs (Hidden by default) -->
-            <div id="soilManualInputs" class="soil-manual-inputs hidden-smooth">
-              <div class="form-grid npk-grid">
-                <div class="form-group">
-                  <label for="soilPh">pH Level</label>
-                  <input type="number" id="soilPh" placeholder="e.g. 6.5" step="0.1">
-                </div>
-                <div class="form-group">
-                  <label for="soilN">Nitrogen (N)</label>
-                  <input type="number" id="soilN" placeholder="mg/kg">
-                </div>
-                <div class="form-group">
-                  <label for="soilP">Phosphorous (P)</label>
-                  <input type="number" id="soilP" placeholder="mg/kg">
-                </div>
-                <div class="form-group">
-                  <label for="soilK">Potassium (K)</label>
-                  <input type="number" id="soilK" placeholder="mg/kg">
-                </div>
-              </div>
-            </div>
-          </div> <!-- /soil-data-section -->
-
-        </div>
-      </div>
-
-      <!-- SUBMIT -->
-      <button id="generateBtn">
-        Generate AI Recommendation
+      <!-- GENERATE BUTTON -->
+      <button id="generateBtn" class="btn-primary" style="width: 100%; padding: 18px; font-size: 1.05rem; letter-spacing: 0.02em; display: flex; align-items: center; justify-content: center; gap: 10px;">
+        <span>✨</span> Generate AI Crop Recommendations
       </button>
-
-    </div>
-
-    <!-- AI RECOMMENDATION RESULT CONTAINER -->
-    <div id="aiRecommendationResult" style="display: none; margin-top: 2rem;">
-      <!-- Dynamic cards will be injected here -->
-      <section id="dynamicRecommendationGrid" class="recommendation-grid"></section>
-    </div>
-
-    <!-- AI SUMMARY (Static mock content hidden) -->
-
-    <section id="mockSummaryCard" class="glass-card ai-summary-card ai-glow" style="display: none;">
-
-      <div class="summary-left">
-
-        <span class="summary-badge">
-          AI ANALYSIS COMPLETE
-        </span>
-
-        <h2>
-          Soybean Is Your Best Recommended Crop
-        </h2>
-
-        <p>
-
-          Based on weather, soil health, rainfall,
-          and market trends, soybean provides the
-          highest profitability and lowest risk
-          for your region this season.
-
-        </p>
-
-      </div>
-
-      <div class="summary-right">
-
-        <div class="summary-score">
-
-          <h1 class="ai-number">94%</h1>
-
-          <p>AI Confidence</p>
-
-        </div>
-
-      </div>
-
     </section>
 
-    <!-- RECOMMENDATION CARDS (Static mock content hidden) -->
-
-    <section id="mockGridCards" class="recommendation-grid" style="display: none;">
-
-      <!-- CARD 1 -->
-
-      <div class="glass-card crop-recommendation-card">
-
-        <div class="crop-top">
-
-          <div>
-
-            <h3>Soybean</h3>
-            <p class="text-soft">
-              Highly Recommended
-            </p>
-
-          </div>
-
-          <span class="recommendation-score">
-            94%
-          </span>
-
-        </div>
-
-        <div class="crop-metrics">
-
-          <div class="metric">
-
-            <span>🌦️ Weather Match</span>
-            <strong>Excellent</strong>
-
-          </div>
-
-          <div class="metric">
-
-            <span>💰 Profitability</span>
-            <strong>High</strong>
-
-          </div>
-
-          <div class="metric">
-
-            <span>⚠️ Risk Level</span>
-            <strong>Low</strong>
-
-          </div>
-
-        </div>
-
-        <div class="crop-tags">
-
-          <span>High Demand</span>
-          <span>Low Water Need</span>
-          <span>Gov Support</span>
-
-        </div>
-
-        <button class="btn-primary full-width-btn">
-
-          View Detailed Insights
-
-        </button>
-
+    <!-- RECOMMENDATION RESULTS CONTAINER -->
+    <section id="aiRecommendationResult" class="fade-in" style="margin-bottom: 40px;">
+      <div class="card-title-row">
+        <h3><span>🌾</span> Top AI Crop Matches for Your Farm</h3>
+        <span class="farm-badge-pill">Sorted by Profitability & Climate Resilience</span>
       </div>
 
-      <!-- CARD 2 -->
-
-      <div class="glass-card crop-recommendation-card">
-
-        <div class="crop-top">
-
-          <div>
-
-            <h3>Sugarcane</h3>
-            <p class="text-soft">
-              Moderate Recommendation
-            </p>
-
+      <div class="recommendation-cards-row" id="dynamicRecommendationGrid">
+        <!-- Card 1: Wheat (High Match) -->
+        <div class="crop-rec-card">
+          <div class="crop-rec-image-box">
+            <img src="assets/images/crop-sample-1.jpg" alt="Wheat">
+            <span class="crop-match-badge">96% AI Match</span>
           </div>
-
-          <span class="recommendation-score">
-            82%
-          </span>
-
+          <div class="crop-rec-body">
+            <div>
+              <div class="crop-rec-header">
+                <h3>Kalyansona Wheat</h3>
+                <div class="crop-rec-variety">Variety: HD-2967 • Grain Crop</div>
+              </div>
+              <p style="font-size: 0.86rem; color: var(--krishi-slate); line-height: 1.45; margin-bottom: 14px;">
+                Excellent soil moisture and nitrogen balance make wheat the safest, highest-yielding crop for your 5-acre black soil plot.
+              </p>
+              <div class="crop-rec-metrics">
+                <div class="crop-rec-metric-item">
+                  <span>💰 Expected Profit</span>
+                  <strong>₹48,000 / Acre</strong>
+                </div>
+                <div class="crop-rec-metric-item">
+                  <span>⚖️ Risk Profile</span>
+                  <strong style="color: #15803D;">Very Low Risk</strong>
+                </div>
+                <div class="crop-rec-metric-item">
+                  <span>🌾 Yield Estimate</span>
+                  <strong>24 Qtl / Acre</strong>
+                </div>
+                <div class="crop-rec-metric-item">
+                  <span>⏳ Duration</span>
+                  <strong>115 - 120 Days</strong>
+                </div>
+              </div>
+              <div class="crop-rec-tags">
+                <span>Govt MSP ₹2,420</span>
+                <span>Drip Compatible</span>
+                <span>Frost Hardy</span>
+              </div>
+            </div>
+            <a href="simulation.html" class="quick-action-pill-btn" style="width: 100%; justify-content: center;">
+              <span>🧠</span> Run Yield Simulation
+            </a>
+          </div>
         </div>
 
-        <div class="crop-metrics">
-
-          <div class="metric">
-
-            <span>🌦️ Weather Match</span>
-            <strong>Good</strong>
-
+        <!-- Card 2: Yellow Mustard (High Profit) -->
+        <div class="crop-rec-card">
+          <div class="crop-rec-image-box">
+            <img src="assets/images/crop-sample-2.jpg" alt="Mustard">
+            <span class="crop-match-badge" style="background: linear-gradient(135deg, #F4A261, #E76F51);">92% AI Match</span>
           </div>
-
-          <div class="metric">
-
-            <span>💰 Profitability</span>
-            <strong>Medium</strong>
-
+          <div class="crop-rec-body">
+            <div>
+              <div class="crop-rec-header">
+                <h3>Pusa Bold Mustard</h3>
+                <div class="crop-rec-variety">Variety: Brassica Juncea • Oilseed</div>
+              </div>
+              <p style="font-size: 0.86rem; color: var(--krishi-slate); line-height: 1.45; margin-bottom: 14px;">
+                Low water requirement and booming APMC market prices (+₹120/Qtl) offer superior profit margins with minimal irrigation.
+              </p>
+              <div class="crop-rec-metrics">
+                <div class="crop-rec-metric-item">
+                  <span>💰 Expected Profit</span>
+                  <strong>₹54,500 / Acre</strong>
+                </div>
+                <div class="crop-rec-metric-item">
+                  <span>⚖️ Risk Profile</span>
+                  <strong style="color: #B45309;">Low - Moderate</strong>
+                </div>
+                <div class="crop-rec-metric-item">
+                  <span>🌾 Yield Estimate</span>
+                  <strong>11 Qtl / Acre</strong>
+                </div>
+                <div class="crop-rec-metric-item">
+                  <span>⏳ Duration</span>
+                  <strong>105 - 110 Days</strong>
+                </div>
+              </div>
+              <div class="crop-rec-tags">
+                <span>High Oil Content</span>
+                <span>Low Water 40%</span>
+                <span>High Mandi Demand</span>
+              </div>
+            </div>
+            <a href="simulation.html" class="quick-action-pill-btn" style="width: 100%; justify-content: center;">
+              <span>🧠</span> Run Yield Simulation
+            </a>
           </div>
-
-          <div class="metric">
-
-            <span>⚠️ Risk Level</span>
-            <strong>Medium</strong>
-
-          </div>
-
         </div>
 
-        <div class="crop-tags">
-
-          <span>Water Intensive</span>
-          <span>Stable Market</span>
-
+        <!-- Card 3: Desi Chana (Soil Regenerative) -->
+        <div class="crop-rec-card">
+          <div class="crop-rec-image-box">
+            <img src="assets/images/crop-sample-1.jpg" alt="Chickpea">
+            <span class="crop-match-badge" style="background: linear-gradient(135deg, #0288D1, #4FC3F7);">88% AI Match</span>
+          </div>
+          <div class="crop-rec-body">
+            <div>
+              <div class="crop-rec-header">
+                <h3>Desi Chana (Chickpea)</h3>
+                <div class="crop-rec-variety">Variety: JG-11 • Legume Pulse</div>
+              </div>
+              <p style="font-size: 0.86rem; color: var(--krishi-slate); line-height: 1.45; margin-bottom: 14px;">
+                Naturally fixes atmospheric nitrogen to regenerate soil fertility for the following Kharif crop while generating stable returns.
+              </p>
+              <div class="crop-rec-metrics">
+                <div class="crop-rec-metric-item">
+                  <span>💰 Expected Profit</span>
+                  <strong>₹42,000 / Acre</strong>
+                </div>
+                <div class="crop-rec-metric-item">
+                  <span>⚖️ Risk Profile</span>
+                  <strong style="color: #15803D;">Low Risk</strong>
+                </div>
+                <div class="crop-rec-metric-item">
+                  <span>🌾 Yield Estimate</span>
+                  <strong>9.5 Qtl / Acre</strong>
+                </div>
+                <div class="crop-rec-metric-item">
+                  <span>⏳ Duration</span>
+                  <strong>95 - 105 Days</strong>
+                </div>
+              </div>
+              <div class="crop-rec-tags">
+                <span>Nitrogen Fixing</span>
+                <span>Govt Subsidy 50%</span>
+                <span>Drought Resilient</span>
+              </div>
+            </div>
+            <a href="simulation.html" class="quick-action-pill-btn" style="width: 100%; justify-content: center;">
+              <span>🧠</span> Run Yield Simulation
+            </a>
+          </div>
         </div>
-
-        <button class="btn-primary full-width-btn">
-
-          View Detailed Insights
-
-        </button>
-
       </div>
-
-      <!-- CARD 3 -->
-
-      <div class="glass-card crop-recommendation-card">
-
-        <div class="crop-top">
-
-          <div>
-
-            <h3>Wheat</h3>
-            <p class="text-soft">
-              Safe Recommendation
-            </p>
-
-          </div>
-
-          <span class="recommendation-score">
-            79%
-          </span>
-
-        </div>
-
-        <div class="crop-metrics">
-
-          <div class="metric">
-
-            <span>🌦️ Weather Match</span>
-            <strong>Good</strong>
-
-          </div>
-
-          <div class="metric">
-
-            <span>💰 Profitability</span>
-            <strong>Stable</strong>
-
-          </div>
-
-          <div class="metric">
-
-            <span>⚠️ Risk Level</span>
-            <strong>Low</strong>
-
-          </div>
-
-        </div>
-
-        <div class="crop-tags">
-
-          <span>Low Risk</span>
-          <span>Government Backed</span>
-
-        </div>
-
-        <button class="btn-primary full-width-btn">
-
-          View Detailed Insights
-
-        </button>
-
-      </div>
-
-    </section>
-
-    <!-- AI INSIGHTS (Static mock content hidden) -->
-
-    <section id="mockBottomGrid" class="dashboard-grid recommendation-bottom-grid" style="display: none;">
-
-      <!-- LEFT -->
-
-      <div class="glass-card dashboard-widget">
-
-        <div class="widget-header">
-
-          <h3>AI Recommendation Insights</h3>
-
-          <span>Generated By AI Agents</span>
-
-        </div>
-
-        <div class="insight-list">
-
-          <div class="insight-item">
-
-            <span>🌧️</span>
-
-            <p>
-
-              Expected rainfall patterns strongly support
-              soybean cultivation this season.
-
-            </p>
-
-          </div>
-
-          <div class="insight-item">
-
-            <span>📈</span>
-
-            <p>
-
-              Soybean market demand is projected to
-              increase by 18% in nearby regions.
-
-            </p>
-
-          </div>
-
-          <div class="insight-item">
-
-            <span>🧪</span>
-
-            <p>
-
-              Soil nitrogen levels are optimal for
-              legume-based crops.
-
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- RIGHT -->
-
-      <div class="glass-card dashboard-widget">
-
-        <div class="widget-header">
-
-          <h3>Government Support</h3>
-
-          <span>Eligible Schemes</span>
-
-        </div>
-
-        <div class="scheme-list">
-
-          <div class="scheme-item">
-
-            <h4>PM-KISAN Support</h4>
-
-            <p>
-              Financial support available for soybean farmers.
-            </p>
-
-          </div>
-
-          <div class="scheme-item">
-
-            <h4>Crop Insurance Scheme</h4>
-
-            <p>
-              Weather protection coverage available.
-            </p>
-
-          </div>
-
-          <div class="scheme-item">
-
-            <h4>Seed Subsidy Program</h4>
-
-            <p>
-              Subsidized certified seed assistance.
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
     </section>
 
   </main>
 
-  <!-- JS -->
+  <!-- CHATBOT COMPONENT CONTAINER -->
+  <div id="chatbotComponent"></div>
 
+  <!-- JAVASCRIPT MODULES -->
   <script src="js/config.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/weather.js"></script>
   <script src="js/recommendation.js"></script>
-  <script src="js/app.js"></script>
 
-  <!-- SIDEBAR + CHATBOT LOADER -->
-
-  <!-- CHATBOT -->
-
-  <div id="chatbotComponent"></div>
-
+  <!-- PAGE LOGIC & INITIALIZERS -->
   <script>
+    // Preset Switcher
+    function applyPreset(cropKey, btnEl) {
+      document.querySelectorAll('.preset-pill').forEach(b => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
 
+      const soilSelect = document.getElementById('soilType');
+      const waterSelect = document.getElementById('waterAvail');
+      const landInput = document.getElementById('landSize');
+
+      if (cropKey === 'wheat') {
+        soilSelect.value = 'Black';
+        waterSelect.value = 'High';
+        landInput.value = '5.0';
+      } else if (cropKey === 'mustard') {
+        soilSelect.value = 'White';
+        waterSelect.value = 'Medium';
+        landInput.value = '3.0';
+      } else if (cropKey === 'chana') {
+        soilSelect.value = 'Alluvial';
+        waterSelect.value = 'Low';
+        landInput.value = '8.0';
+      } else if (cropKey === 'soybean') {
+        soilSelect.value = 'Black';
+        waterSelect.value = 'High';
+        landInput.value = '4.0';
+      }
+    }
+
+    // Toggle Manual Soil Inputs
+    document.querySelectorAll('input[name="hasSoilData"]').forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const manual = document.getElementById('soilManualInputs');
+        const auto = document.getElementById('soilAutoBadge');
+        if (e.target.value === 'yes') {
+          manual.style.display = 'grid';
+          auto.style.display = 'none';
+        } else {
+          manual.style.display = 'none';
+          auto.style.display = 'flex';
+        }
+      });
+    });
+
+    // Auto-load Weather with Nashik Fallback
+    document.addEventListener('DOMContentLoaded', () => {
+      const defaultLat = 19.9975;
+      const defaultLon = 73.7898;
+      
+      window.recommendationData = window.recommendationData || {};
+      window.recommendationData.location = { latitude: defaultLat, longitude: defaultLon };
+
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            window.recommendationData.location = { latitude: pos.coords.latitude, longitude: pos.coords.longitude };
+            fetchWeatherData(pos.coords.latitude, pos.coords.longitude);
+          },
+          () => {
+            fetchWeatherData(defaultLat, defaultLon);
+          },
+          { timeout: 3500 }
+        );
+      } else {
+        fetchWeatherData(defaultLat, defaultLon);
+      }
+    });
+
+    // Component Loader
     async function loadComponent(id, file) {
-
-      const response = await fetch(file);
-
-      const data = await response.text();
-
-      document.getElementById(id).innerHTML = data;
+      try {
+        const res = await fetch(file);
+        if (res.ok) {
+          const html = await res.text();
+          document.getElementById(id).innerHTML = html;
+        }
+      } catch (e) {
+        console.error(e);
+      }
     }
 
-    async function initializePage() {
+    async function initPage() {
+      await loadComponent("sidebar", "components/sidebar.html");
+      setTimeout(() => {
+        const links = document.querySelectorAll('.sidebar-nav a');
+        links.forEach(l => {
+          if (l.getAttribute('href') === 'recommendation.html') l.classList.add('active');
+        });
+      }, 100);
 
-      /* LOAD SIDEBAR */
-
-      await loadComponent(
-        "sidebar",
-        "components/sidebar.html"
-      );
-
-      /* LOAD CHATBOT */
-
-      await loadComponent(
-        "chatbotComponent",
-        "components/chatbotWidget.html"
-      );
-
-      /* LOAD CHATBOT JS AFTER COMPONENT EXISTS */
-
-      const chatbotScript =
-        document.createElement("script");
-
-      chatbotScript.src = "js/chatbot.js";
-
-      document.body.appendChild(chatbotScript);
+      await loadComponent("chatbotComponent", "components/chatbotWidget.html");
+      const botScript = document.createElement("script");
+      botScript.src = "js/chatbot.js";
+      botScript.onload = () => { if (typeof initializeChatbot === 'function') initializeChatbot(); };
+      document.body.appendChild(botScript);
     }
 
-    initializePage();
-
+    initPage();
   </script>
-
-
 
 </body>
 

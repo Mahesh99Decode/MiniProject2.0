@@ -35,8 +35,12 @@ def yield_prediction():
     data = request.json
 
     values = [
-        data.get("rainfall", 0),
-        data.get("temperature", 0)
+        data.get("Area", 0),          # Default Area label encoding
+        data.get("Item", 0),          # Default Item label encoding
+        data.get("Year", 2024),       # Current year
+        data.get("rainfall", 100),    # average_rain_fall_mm_per_year
+        data.get("pesticides", 100),  # pesticides_tonnes
+        data.get("temperature", 25)   # avg_temp
     ]
 
     try:
@@ -49,28 +53,6 @@ def yield_prediction():
             "predicted_yield": "Yield prediction not available"
         })
 
-import google.generativeai as genai
-import os
-
-@app.route("/chat", methods=["POST"])
-def chat():
-    data = request.json
-    message = data.get("message", "")
-    
-    api_key = os.environ.get("GEMINI_API_KEY", "")
-    
-    if not api_key:
-        return jsonify({"reply": "I am not yet configured with an API key. Please set GEMINI_API_KEY in your environment variables to enable my AI brain!"})
-        
-    try:
-        genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-2.5-flash')
-        prompt = f"You are KrishiMitra, an expert AI farming assistant in India. Answer the farmer's question kindly, accurately, and concisely. Keep formatting simple. Question: {message}"
-        
-        response = model.generate_content(prompt)
-        return jsonify({"reply": response.text})
-    except Exception as e:
-        return jsonify({"reply": f"Sorry, I encountered an error: {str(e)}"})
 
 if __name__ == "__main__":
     app.run(debug=True, port=5002)

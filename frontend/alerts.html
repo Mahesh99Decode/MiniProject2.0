@@ -2,385 +2,237 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Alerts & Weather Radar | KrishiMitra AI</title>
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
 
-  <title>Alerts Center | KrishiMitra AI</title>
-
-  <!-- CSS -->
-
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/animation.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/dashboard.css">
-
+  <link rel="stylesheet" href="css/cards.css">
 </head>
 
 <body>
 
-  <!-- SIDEBAR -->
-
+  <!-- ASYNCHRONOUS SIDEBAR INJECTION -->
   <div id="sidebar"></div>
 
-  <!-- MAIN -->
-
+  <!-- MAIN ALERTS SECTION -->
   <main class="dashboard-main">
 
-    <!-- HEADER -->
-
-    <header class="dashboard-topbar glass-card">
-
-      <div>
-
+    <!-- TOP HERO RIBBON -->
+    <header class="dashboard-hero-ribbon fade-in">
+      <div class="hero-greeting-group">
         <h2>
-          Smart Alerts Center 🚨
+          Smart Alerts & Weather Radar <span class="wave-emoji">🚨</span>
         </h2>
-
-        <p class="text-soft">
-
-          Real-time AI alerts and agricultural
-          notifications for your farm.
-
-        </p>
-
+        <div class="hero-subtitle-row">
+          <span class="farm-badge-pill">
+            📍 Green Valley Plot #1 • Active Sentinel
+          </span>
+          <span class="ai-status-pulse">
+            <span class="pulse-dot"></span> Live Farm Monitoring Engine
+          </span>
+        </div>
       </div>
 
+      <div class="hero-actions-group">
+        <a href="dashboard.html" class="quick-action-pill-btn" style="background: white; color: var(--krishi-forest); border: 1.5px solid rgba(45,106,79,0.3);">
+          <span>📊</span> Dashboard
+        </a>
+      </div>
     </header>
 
-    <!-- ALERT STATS -->
-
-    <section class="analytics-grid">
-
-      <div class="glass-card analytics-card warning-alert">
-
+    <!-- ALERT STATS TILES -->
+    <section class="analytics-grid fade-in" style="margin-bottom: 26px;">
+      <div class="glass-card analytics-card warning-alert" style="border-radius: 18px; padding: 22px;">
         <div>
-
-          <p>Critical Alerts</p>
-
-          <h2>03</h2>
-
+          <p style="font-size: 0.82rem; color: var(--krishi-muted);">Urgent Actions</p>
+          <h2 style="font-size: 2rem; color: #C62828;">02</h2>
         </div>
-
-        <span class="analytics-icon">
-          ⚠️
-        </span>
-
+        <span class="analytics-icon">⚠️</span>
       </div>
 
-      <div class="glass-card analytics-card success-alert">
-
+      <div class="glass-card analytics-card success-alert" style="border-radius: 18px; padding: 22px;">
         <div>
-
-          <p>Resolved Issues</p>
-
-          <h2>18</h2>
-
+          <p style="font-size: 0.82rem; color: var(--krishi-muted);">Automated Resolutions</p>
+          <h2 style="font-size: 2rem; color: #15803D;">18</h2>
         </div>
-
-        <span class="analytics-icon">
-          ✅
-        </span>
-
+        <span class="analytics-icon">✅</span>
       </div>
 
-      <div class="glass-card analytics-card">
-
+      <div class="glass-card analytics-card" style="border-radius: 18px; padding: 22px;">
         <div>
-
-          <p>Weather Warnings</p>
-
-          <h2>07</h2>
-
+          <p style="font-size: 0.82rem; color: var(--krishi-muted);">Weather Advisories</p>
+          <h2 style="font-size: 2rem; color: #0288D1;">03</h2>
         </div>
-
-        <span class="analytics-icon">
-          🌧️
-        </span>
-
+        <span class="analytics-icon">🌦️</span>
       </div>
 
-      <div class="glass-card analytics-card">
-
+      <div class="glass-card analytics-card" style="border-radius: 18px; padding: 22px;">
         <div>
-
-          <p>AI Notifications</p>
-
-          <h2>12</h2>
-
+          <p style="font-size: 0.82rem; color: var(--krishi-muted);">Market Price Spikes</p>
+          <h2 style="font-size: 2rem; color: #D4A017;">02</h2>
         </div>
-
-        <span class="analytics-icon">
-          🤖
-        </span>
-
+        <span class="analytics-icon">📈</span>
       </div>
-
     </section>
 
-    <!-- PRIORITY ALERTS -->
+    <!-- ALERT FILTER TABS -->
+    <div class="crop-preset-pills fade-in" style="margin-bottom: 20px;">
+      <button class="preset-pill active" onclick="filterAlertTab('all', this)">All Notifications (7)</button>
+      <button class="preset-pill" onclick="filterAlertTab('weather', this)">🌦️ Weather Warnings (3)</button>
+      <button class="preset-pill" onclick="filterAlertTab('pest', this)">🛡️ Pest & Disease (2)</button>
+      <button class="preset-pill" onclick="filterAlertTab('market', this)">📈 Market APMC Surges (2)</button>
+    </div>
 
-    <section class="glass-card dashboard-widget">
+    <!-- ALERTS FEED STACK -->
+    <section class="glass-card dashboard-widget fade-in" style="padding: 28px; border-radius: 20px;">
+      <div class="alerts-feed-stack" id="fullAlertsList">
 
-      <div class="widget-header">
-
-        <h3>Priority Alerts</h3>
-
-        <span>High Priority</span>
-
-      </div>
-
-      <div class="priority-alerts">
-
-        <div class="priority-card danger-alert">
-
-          <div class="priority-icon">
-            🚨
-          </div>
-
-          <div>
-
-            <h4>Heavy Rainfall Warning</h4>
-
+        <!-- ALERT 1: WEATHER -->
+        <div class="smart-alert-bubble critical" data-type="weather">
+          <span class="alert-bubble-icon">⛈️</span>
+          <div class="alert-bubble-content" style="flex: 1;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h5>Pre-Monsoon Thunderstorm & Hail Hazard Alert</h5>
+              <span class="kpi-pill warning">High Severity</span>
+            </div>
             <p>
-
-              Extreme rainfall expected in the
-              next 24 hours. Protect stored crops.
-
+              IMD Doppler radar indicates convective thunderstorm clouds forming over Nashik district. Wind gusts up to 45 km/h predicted. Secure greenhouse polyhouses and pause open harvesting.
             </p>
-
+            <div class="alert-bubble-time">12 minutes ago • Doppler Weather Radar #4</div>
           </div>
-
         </div>
 
-        <div class="priority-card warning-alert">
-
-          <div class="priority-icon">
-            ⚠️
-          </div>
-
-          <div>
-
-            <h4>Disease Probability Increased</h4>
-
+        <!-- ALERT 2: PEST -->
+        <div class="smart-alert-bubble advisory" data-type="pest">
+          <span class="alert-bubble-icon">🍂</span>
+          <div class="alert-bubble-content" style="flex: 1;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h5>Yellow Stripe Rust Spore Influx Watch</h5>
+              <span class="kpi-pill warning">Early Scouting</span>
+            </div>
             <p>
-
-              AI Vision Agent detected possible
-              fungal infection patterns.
-
+              Adjoining taluka reported mild yellow rust incidence on wheat crops. Morning inspection recommended along field boundaries and windward edges. Prophylactic neem spray advised.
             </p>
-
+            <div class="alert-bubble-time">1 hour ago • AI Pest Surveillance Grid</div>
           </div>
+        </div>
 
+        <!-- ALERT 3: MARKET -->
+        <div class="smart-alert-bubble normal" data-type="market">
+          <span class="alert-bubble-icon">📈</span>
+          <div class="alert-bubble-content" style="flex: 1;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h5>Mandi Surge: Yellow Mustard Rates Jump +₹120/Qtl</h5>
+              <span class="kpi-pill positive">Profitable Window</span>
+            </div>
+            <p>
+              Crude edible oil demand spiked today. Nashik APMC benchmark rate reached ₹5,680 / Quintal. Farmers with stored mustard stock can liquidate 30% produce at premium.
+            </p>
+            <div class="alert-bubble-time">3 hours ago • APMC Live Market Wire</div>
+          </div>
+        </div>
+
+        <!-- ALERT 4: WEATHER -->
+        <div class="smart-alert-bubble normal" data-type="weather">
+          <span class="alert-bubble-icon">☀️</span>
+          <div class="alert-bubble-content" style="flex: 1;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h5>Optimal Spraying Window: Tomorrow 06:30 AM to 10:30 AM</h5>
+              <span class="kpi-pill positive">Favorable Conditions</span>
+            </div>
+            <p>
+              Low wind turbulence (&lt; 8 km/h) and moderate morning temperature create an ideal condition for micronutrient foliar application.
+            </p>
+            <div class="alert-bubble-time">5 hours ago • Micro-Climate Station</div>
+          </div>
+        </div>
+
+        <!-- ALERT 5: IRRIGATION -->
+        <div class="smart-alert-bubble normal" data-type="weather">
+          <span class="alert-bubble-icon">💧</span>
+          <div class="alert-bubble-content" style="flex: 1;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h5>Drip Cycle Efficiency Verified</h5>
+              <span class="kpi-pill positive">2,400 L Water Saved</span>
+            </div>
+            <p>
+              Smart soil moisture sensor feedback triggered scheduled shutoff once soil field capacity reached 64%. Water conserved: 2,400 liters.
+            </p>
+            <div class="alert-bubble-time">Today, 06:45 AM • IoT Sensor Hub</div>
+          </div>
         </div>
 
       </div>
-
-    </section>
-
-    <!-- ALERT GRID -->
-
-    <section class="dashboard-grid recommendation-bottom-grid">
-
-      <!-- SMART NOTIFICATIONS -->
-
-      <div class="glass-card dashboard-widget">
-
-        <div class="widget-header">
-
-          <h3>AI Smart Notifications</h3>
-
-          <span>Live Updates</span>
-
-        </div>
-
-        <div class="notification-list">
-
-          <div class="notification-item">
-
-            <span>💧</span>
-
-            <div>
-
-              <h4>Irrigation Reminder</h4>
-
-              <p>
-                Recommended watering time: 6:00 AM.
-              </p>
-
-            </div>
-
-          </div>
-
-          <div class="notification-item">
-
-            <span>📈</span>
-
-            <div>
-
-              <h4>Market Price Increase</h4>
-
-              <p>
-                Soybean demand increased by 12%.
-              </p>
-
-            </div>
-
-          </div>
-
-          <div class="notification-item">
-
-            <span>🌱</span>
-
-            <div>
-
-              <h4>Crop Growth Stable</h4>
-
-              <p>
-                AI monitoring shows healthy growth.
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- ALERT TIMELINE -->
-
-      <div class="glass-card dashboard-widget">
-
-        <div class="widget-header">
-
-          <h3>Alert Timeline</h3>
-
-          <span>Recent Activity</span>
-
-        </div>
-
-        <div class="timeline">
-
-          <div class="timeline-item active">
-
-            <div class="timeline-dot"></div>
-
-            <div>
-
-              <h4>Today</h4>
-              <p>Heavy rainfall alert generated.</p>
-
-            </div>
-
-          </div>
-
-          <div class="timeline-item warning">
-
-            <div class="timeline-dot"></div>
-
-            <div>
-
-              <h4>Yesterday</h4>
-              <p>Disease detection alert triggered.</p>
-
-            </div>
-
-          </div>
-
-          <div class="timeline-item active">
-
-            <div class="timeline-dot"></div>
-
-            <div>
-
-              <h4>2 Days Ago</h4>
-              <p>AI irrigation reminder delivered.</p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
     </section>
 
   </main>
 
-  <!-- JS -->
+  <!-- ASYNCHRONOUS CHATBOT WIDGET -->
+  <div id="chatbotComponent"></div>
 
+  <!-- JAVASCRIPT MODULES -->
   <script src="js/config.js"></script>
   <script src="js/utils.js"></script>
-  <script src="js/alerts.js"></script>
   <script src="js/app.js"></script>
 
-  <!-- SIDEBAR -->
-
+  <!-- FILTER LOGIC -->
   <script>
+    function filterAlertTab(type, btn) {
+      document.querySelectorAll('.preset-pill').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
 
-    async function loadComponent(id, file) {
-
-      const response = await fetch(file);
-
-      const data = await response.text();
-
-      document.getElementById(id).innerHTML = data;
+      const bubbles = document.querySelectorAll('.smart-alert-bubble');
+      bubbles.forEach(b => {
+        const bubbleType = b.getAttribute('data-type');
+        if (type === 'all' || bubbleType === type) {
+          b.style.display = 'flex';
+        } else {
+          b.style.display = 'none';
+        }
+      });
     }
 
-    loadComponent("sidebar", "components/sidebar.html");
+    // Component Loader
+    async function loadComponent(id, file) {
+      try {
+        const res = await fetch(file);
+        if (res.ok) {
+          const html = await res.text();
+          document.getElementById(id).innerHTML = html;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
 
+    async function initPage() {
+      await loadComponent("sidebar", "components/sidebar.html");
+      setTimeout(() => {
+        const links = document.querySelectorAll('.sidebar-nav a');
+        links.forEach(l => {
+          if (l.getAttribute('href') === 'alerts.html') l.classList.add('active');
+        });
+      }, 100);
+
+      await loadComponent("chatbotComponent", "components/chatbotWidget.html");
+      const botScript = document.createElement("script");
+      botScript.src = "js/chatbot.js";
+      botScript.onload = () => { if (typeof initializeChatbot === 'function') initializeChatbot(); };
+      document.body.appendChild(botScript);
+    }
+
+    initPage();
   </script>
-
-<!-- CHATBOT -->
-
-<div id="chatbotComponent"></div>
-
-<script src="js/chatbot.js"></script>
-
-<script>
-
-  async function loadComponent(id, file) {
-
-    const response =
-      await fetch(file);
-
-    const data =
-      await response.text();
-
-    document.getElementById(id)
-      .innerHTML = data;
-  }
-
-  async function initializePage() {
-
-    /* LOAD SIDEBAR */
-
-    await loadComponent(
-      "sidebar",
-      "components/sidebar.html"
-    );
-
-    /* LOAD CHATBOT */
-
-    await loadComponent(
-      "chatbotComponent",
-      "components/chatbotWidget.html"
-    );
-
-    /* INITIALIZE CHATBOT */
-
-    initializeChatbot();
-  }
-
-  initializePage();
-
-</script>
 
 </body>
 
