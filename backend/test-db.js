@@ -34,8 +34,11 @@ async function testDatabase() {
 
   console.log("\n4. Testing User insert & delete in MongoDB...");
   const testEmail = `test_${Date.now()}@krishimitra.org`;
+  const testUsername = `user_${Date.now()}`;
   const user = await User.create({
+    username: testUsername,
     email: testEmail,
+    password: "Password123!",
     name: "Farmer Tester",
     location: "Nashik, Maharashtra",
   });

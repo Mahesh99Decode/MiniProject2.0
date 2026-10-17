@@ -2532,4 +2532,132 @@ select {
   .npk-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* =========================================
+   CROP DISEASE SCANNER & SAMPLE CHIPS
+========================================= */
+.scanner-hero-area {
+  border: 2px dashed rgba(45, 106, 79, 0.35);
+  border-radius: 20px;
+  padding: 32px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.scanner-hero-area:hover {
+  border-color: #2D6A4F;
+  background: rgba(45, 106, 79, 0.04);
+}
+
+.scanner-beam-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #52B788, #22C55E, transparent);
+  box-shadow: 0 0 15px #22C55E;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scanner-hero-area.scanning .scanner-beam-line {
+  opacity: 1;
+  animation: scanSweep 1.8s ease-in-out infinite;
+}
+
+@keyframes scanSweep {
+  0% { top: 0%; }
+  50% { top: 100%; }
+  100% { top: 0%; }
+}
+
+.sample-leaves-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.sample-leaf-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1.5px solid rgba(45, 106, 79, 0.2);
+  border-radius: 50px;
+  padding: 6px 16px 6px 8px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1B4332;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.sample-leaf-chip:hover {
+  border-color: #2D6A4F;
+  background: rgba(45, 106, 79, 0.06);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 106, 79, 0.15);
+}
+
+.sample-leaf-thumb {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid #52B788;
+  display: block;
+}
+
+.treatment-remedy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.remedy-box {
+  padding: 16px;
+  border-radius: 14px;
+  line-height: 1.5;
+}
+
+.remedy-box.organic {
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.remedy-box.chemical {
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+.remedy-box h5 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.remedy-box.organic h5 {
+  color: #15803D;
+}
+
+.remedy-box.chemical h5 {
+  color: #1D4ED8;
+}
+
+.remedy-box p {
+  font-size: 0.84rem;
+  color: #334155;
+  margin: 0;
 }

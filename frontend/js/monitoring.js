@@ -229,12 +229,64 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
+  /* GLOBAL SAMPLE TEST TRIGGER */
+  window.testSample = async function(type) {
+    let sampleUrl = "assets/images/leaf-disease.jpg";
+    let name = "leaf-disease.jpg";
+    if (type === "blight") {
+      sampleUrl = "assets/images/crop-sample-2.jpg";
+      name = "crop-sample-2.jpg";
+    } else if (type === "healthy") {
+      sampleUrl = "assets/images/crop-sample-1.jpg";
+      name = "crop-sample-1.jpg";
+    }
+
+    if (previewImage && previewContainer) {
+      previewImage.src = sampleUrl;
+      previewContainer.classList.remove("hidden");
+    }
+
+    try {
+      const res = await fetch(sampleUrl);
+      const blob = await res.blob();
+      const reader = new FileReader();
+      reader.onload = async function(e) {
+        const base64Url = e.target.result;
+        await analyzeImage(base64Url, blob.type || "image/jpeg", name);
+      };
+      reader.readAsDataURL(blob);
+    } catch (err) {
+      console.warn("Direct sample fetch notice:", err);
+      await analyzeImage(sampleUrl, "image/jpeg", name);
+    }
+  };
+
   function updateUI(data) {
     if (!data) return;
+
+    // 0. Update Diagnosed Crop & Disease Title
+    const titleDisplay = document.getElementById("diagCropDiseaseTitle");
+    if (titleDisplay) {
+      titleDisplay.innerText = data.cropName || "Diagnosed Plant Foliage";
+    }
 
     // 1. Update Health Score & Summary
     const scoreDisplay = document.getElementById("healthScoreDisplay") || document.querySelector(".health-circle h1");
     if (scoreDisplay) scoreDisplay.innerText = `${data.healthScore}%`;
+
+    const healthCircle = document.querySelector(".health-circle");
+    if (healthCircle) {
+      if (data.healthScore >= 85) {
+        healthCircle.style.background = "linear-gradient(135deg, #2D6A4F, #52B788)";
+        healthCircle.style.boxShadow = "0 8px 24px rgba(45,106,79,0.3)";
+      } else if (data.healthScore >= 60) {
+        healthCircle.style.background = "linear-gradient(135deg, #D97706, #FBBF24)";
+        healthCircle.style.boxShadow = "0 8px 24px rgba(217,119,6,0.3)";
+      } else {
+        healthCircle.style.background = "linear-gradient(135deg, #DC2626, #F87171)";
+        healthCircle.style.boxShadow = "0 8px 24px rgba(220,38,38,0.3)";
+      }
+    }
 
     const summaryDisplay = document.getElementById("healthSummaryDisplay") || document.querySelector(".health-score-card p");
     if (summaryDisplay) summaryDisplay.innerText = data.healthSummary;

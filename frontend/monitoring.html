@@ -17,6 +17,55 @@
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/cards.css">
+  <style>
+    .sample-leaves-gallery {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 12px !important;
+      margin-top: 12px !important;
+    }
+    .sample-leaf-chip {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      background: #ffffff !important;
+      border: 1.5px solid rgba(45, 106, 79, 0.25) !important;
+      border-radius: 50px !important;
+      padding: 6px 16px 6px 8px !important;
+      cursor: pointer !important;
+      font-size: 0.88rem !important;
+      font-weight: 600 !important;
+      color: #1B4332 !important;
+      transition: all 0.2s ease !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+    }
+    .sample-leaf-chip:hover {
+      border-color: #2D6A4F !important;
+      background: rgba(45, 106, 79, 0.08) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 4px 12px rgba(45, 106, 79, 0.18) !important;
+    }
+    .sample-leaf-thumb {
+      width: 36px !important;
+      height: 36px !important;
+      min-width: 36px !important;
+      max-width: 36px !important;
+      border-radius: 50% !important;
+      object-fit: cover !important;
+      border: 1.5px solid #52B788 !important;
+      display: inline-block !important;
+    }
+    .health-circle {
+      margin: 16px auto !important;
+      box-shadow: 0 10px 25px rgba(45, 106, 79, 0.25) !important;
+    }
+    .health-circle h1 {
+      color: #1B4332 !important;
+      font-size: 2.8rem !important;
+      font-weight: 800 !important;
+      font-family: 'Space Grotesk', sans-serif !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -93,114 +142,52 @@
           <!-- Sample Leaves Quick-Test Bar -->
           <div style="margin-top: 20px;">
             <p style="font-size: 0.82rem; font-weight: 600; color: var(--krishi-muted); margin-bottom: 8px;">Or test instantly with sample diseased leaves:</p>
-            <div class="sample-leaves-gallery">
-              <button class="sample-leaf-chip" onclick="testSample('rust')">
-                <img src="assets/images/leaf-disease.jpg" alt="Rust" class="sample-leaf-thumb">
-                <span>🌾 Wheat Yellow Rust</span>
+            <div class="sample-leaves-gallery" style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+              <button class="sample-leaf-chip" onclick="testSample('rust')" style="display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1.5px solid #2D6A4F; border-radius: 50px; padding: 4px 14px 4px 6px; cursor: pointer;">
+                <img src="assets/images/leaf-disease.jpg" alt="Rust" class="sample-leaf-thumb" style="width: 32px !important; height: 32px !important; min-width: 32px !important; max-width: 32px !important; border-radius: 50% !important; object-fit: cover !important; border: 1.5px solid #52B788 !important; display: inline-block !important;">
+                <span style="font-size: 0.86rem; font-weight: 600; color: #1B4332;">🌾 Wheat Yellow Rust</span>
               </button>
-              <button class="sample-leaf-chip" onclick="testSample('blight')">
-                <img src="assets/images/crop-sample-2.jpg" alt="Blight" class="sample-leaf-thumb">
-                <span>🌼 Mustard Alternaria Blight</span>
+              <button class="sample-leaf-chip" onclick="testSample('blight')" style="display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1.5px solid #2D6A4F; border-radius: 50px; padding: 4px 14px 4px 6px; cursor: pointer;">
+                <img src="assets/images/crop-sample-2.jpg" alt="Blight" class="sample-leaf-thumb" style="width: 32px !important; height: 32px !important; min-width: 32px !important; max-width: 32px !important; border-radius: 50% !important; object-fit: cover !important; border: 1.5px solid #52B788 !important; display: inline-block !important;">
+                <span style="font-size: 0.86rem; font-weight: 600; color: #1B4332;">🌼 Mustard Alternaria Blight</span>
               </button>
-              <button class="sample-leaf-chip" onclick="testSample('healthy')">
-                <img src="assets/images/crop-sample-1.jpg" alt="Healthy" class="sample-leaf-thumb">
-                <span>✅ Healthy Wheat Leaf</span>
+              <button class="sample-leaf-chip" onclick="testSample('healthy')" style="display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1.5px solid #2D6A4F; border-radius: 50px; padding: 4px 14px 4px 6px; cursor: pointer;">
+                <img src="assets/images/crop-sample-1.jpg" alt="Healthy" class="sample-leaf-thumb" style="width: 32px !important; height: 32px !important; min-width: 32px !important; max-width: 32px !important; border-radius: 50% !important; object-fit: cover !important; border: 1.5px solid #52B788 !important; display: inline-block !important;">
+                <span style="font-size: 0.86rem; font-weight: 600; color: #1B4332;">✅ Healthy Wheat Leaf</span>
               </button>
             </div>
           </div>
         </div>
 
-        <!-- 2. WEEKLY CROP TIMELINE -->
-        <div class="glass-card dashboard-widget fade-in" style="margin-top: 26px;">
-          <div class="card-title-row">
-            <h3><span>📅</span> Weekly Crop Growth & Health Log</h3>
-            <span class="farm-badge-pill">Plot 2A</span>
-          </div>
 
-          <div class="timeline" id="weeklyTimeline">
-            <div class="timeline-item active">
-              <div class="timeline-dot"></div>
-              <div>
-                <h4 style="font-size: 0.95rem;">Week 1 • Germination & Emergence</h4>
-                <p style="font-size: 0.82rem; color: var(--krishi-muted);">Uniform seedling emergence noted across 98% of beds. Vigor optimal.</p>
-              </div>
-            </div>
-
-            <div class="timeline-item active">
-              <div class="timeline-dot"></div>
-              <div>
-                <h4 style="font-size: 0.95rem;">Week 2 • Crown Root Initiation (CRI)</h4>
-                <p style="font-size: 0.82rem; color: var(--krishi-muted);">First irrigation applied. Root development and chlorophyll SPAD: 42.0.</p>
-              </div>
-            </div>
-
-            <div class="timeline-item active">
-              <div class="timeline-dot"></div>
-              <div>
-                <h4 style="font-size: 0.95rem;">Week 3 • Early Tillering Phase</h4>
-                <p style="font-size: 0.82rem; color: var(--krishi-muted);">Micro-nutrient zinc application completed. Leaf color deep emerald green.</p>
-              </div>
-            </div>
-
-            <div class="timeline-item" style="opacity: 0.7;">
-              <div class="timeline-dot" style="background: #94A3B8;"></div>
-              <div>
-                <h4 style="font-size: 0.95rem;">Week 4 • Active Tillering (Current)</h4>
-                <p style="font-size: 0.82rem; color: var(--krishi-muted);">AI Sentinel active monitoring for foliar pathogens & weed count.</p>
-              </div>
-            </div>
-          </div>
-        </div>
 
       </div>
 
       <!-- RIGHT COLUMN: DIAGNOSTIC REPORT & PRESCRIPTIONS -->
       <div class="dashboard-right">
 
-        <!-- 1. HEALTH SCORE GAUGE -->
+        <!-- 1. HEALTH SCORE GAUGE & DIAGNOSIS -->
         <div class="glass-card dashboard-widget ai-glow fade-in">
           <div class="card-title-row">
             <h3><span>🛡️</span> Diagnostic Health Score</h3>
-            <span class="severity-pill-badge mild" id="diagSeverityBadge">Normal</span>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="farm-badge-pill" id="diagConfidenceTag">98.2% AI Confidence</span>
+              <span class="severity-pill-badge mild" id="diagSeverityBadge">Normal</span>
+            </div>
           </div>
 
           <div class="health-score-card">
             <div class="health-circle" style="width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(135deg, #2D6A4F, #52B788); display: flex; align-items: center; justify-content: center; color: white; margin: 10px auto 16px; box-shadow: 0 8px 24px rgba(45,106,79,0.3);">
               <h1 style="font-size: 3.2rem; font-family: 'Space Grotesk', sans-serif;" id="healthScoreDisplay">94%</h1>
             </div>
+            <h4 id="diagCropDiseaseTitle" style="font-size: 1.18rem; font-weight: 700; color: #1B4332; text-align: center; margin-bottom: 6px;">Pristine Crop Foliage</h4>
             <p style="font-size: 0.9rem; color: var(--krishi-slate); text-align: center; line-height: 1.5;" id="healthSummaryDisplay">
               Crop leaf demonstrates strong physiological vigor. Minimal stress indicators detected in recent diagnostic scan.
             </p>
           </div>
         </div>
 
-        <!-- 2. PATHOLOGY DETECTION FINDINGS -->
-        <div class="glass-card dashboard-widget fade-in" style="margin-top: 26px;">
-          <div class="card-title-row">
-            <h3><span>🔬</span> Detected Pathogen Findings</h3>
-            <span class="farm-badge-pill" id="diagConfidenceTag">98.2% AI Confidence</span>
-          </div>
-
-          <div class="detection-list" id="detectionsContainer">
-            <div class="detection-card success-detection">
-              <div class="detection-icon">✅</div>
-              <div>
-                <h4 style="font-size: 0.95rem; font-weight: 700;">Healthy Leaf Epidermis</h4>
-                <p style="font-size: 0.82rem; color: var(--krishi-muted);">No active spore germination or necrotizing leaf tissue detected.</p>
-              </div>
-            </div>
-
-            <div class="detection-card info-detection">
-              <div class="detection-icon">💧</div>
-              <div>
-                <h4 style="font-size: 0.95rem; font-weight: 700;">Cellular Hydration Optimal</h4>
-                <p style="font-size: 0.82rem; color: var(--krishi-muted);">Turgor pressure and cell moisture distribution classified as Grade A.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3. ACTIONABLE PRESCRIPTIONS (ORGANIC & CHEMICAL) -->
+        <!-- 2. ACTIONABLE PRESCRIPTIONS (ORGANIC & CHEMICAL) -->
         <div class="glass-card dashboard-widget fade-in" style="margin-top: 26px;">
           <div class="card-title-row">
             <h3><span>💊</span> Curative Prescriptions</h3>

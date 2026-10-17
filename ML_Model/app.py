@@ -1,11 +1,48 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from PIL import Image
 
 from utils.crop_predict import predict_crop
 from utils.yield_predict import predict_yield
+from utils.disease_predict import predict_crop_disease
 
 app = Flask(__name__)
 CORS(app)
+
+@app.route("/predict-disease", methods=["POST"])
+def disease_prediction():
+    try:
+        # Check for multipart file upload
+        if "file" in request.files or "image" in request.files:
+            file = request.files.get("file") or request.files.get("image")
+            img = Image.open(file.stream).convert("RGB")
+            report = predict_crop_disease(img)
+            return jsonify({
+                "success": True,
+                "data": report
+            })
+
+        # Check for JSON base64 payload
+        data = request.get_json(silent=True) or {}
+        image_data = data.get("imageBase64") or data.get("image")
+
+        if not image_data:
+            return jsonify({
+                "success": False,
+                "message": "No image data or file provided for disease prediction"
+            }), 400
+
+        report = predict_crop_disease(image_data)
+        return jsonify({
+            "success": True,
+            "data": report
+        })
+
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "message": str(e)
+        }), 500
 
 @app.route("/predict-crop", methods=["POST"])
 def crop():
