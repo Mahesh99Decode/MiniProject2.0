@@ -267,7 +267,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // 0. Update Diagnosed Crop & Disease Title
     const titleDisplay = document.getElementById("diagCropDiseaseTitle");
     if (titleDisplay) {
-      titleDisplay.innerText = data.cropName || "Diagnosed Plant Foliage";
+      if (data.rawPrediction && data.rawPrediction.class) {
+        const parts = data.rawPrediction.class.split("___");
+        const crop = parts[0].replace(/_/g, " ");
+        const disease = parts[1] ? parts[1].replace(/_/g, " ") : "";
+        titleDisplay.innerText = disease && !disease.toLowerCase().includes("healthy") 
+          ? `${crop} • ${disease}` 
+          : `${crop} (Healthy Foliage)`;
+      } else {
+        titleDisplay.innerText = data.cropName || "Diagnosed Plant Foliage";
+      }
     }
 
     // 1. Update Health Score & Summary
