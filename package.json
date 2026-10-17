@@ -4,10 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:frontend": "npm --prefix frontend-react run dev",
     "build:frontend": "npm --prefix frontend-react run build",
     "preview:frontend": "npm --prefix frontend-react run preview"
+=======
+    "test": "echo \"Error: no test specified\" && exit 1"
+>>>>>>> 72b9483fdf8d1ae0024355b9dfc0284a68dc287a
   },
   "repository": {
     "type": "git",

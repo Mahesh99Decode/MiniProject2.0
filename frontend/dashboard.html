@@ -593,20 +593,45 @@
         .then(res => res.json())
         .then(user => {
           if (user && user.name) {
+<<<<<<< HEAD
             document.getElementById('welcomeFarmerText').innerHTML = 
               `${greetingTime}, ${user.name} <span class="wave-emoji">👋</span>`;
           } else {
             document.getElementById('welcomeFarmerText').innerHTML = 
               `${greetingTime}, Rajesh Patil <span class="wave-emoji">👋</span>`;
+=======
+            localStorage.setItem('krishimitra_user_name', user.name);
+            document.getElementById('welcomeFarmerText').innerHTML = 
+              `${greetingTime}, ${user.name} <span class="wave-emoji">👋</span>`;
+
+            const sbName = document.getElementById('sidebarUserName');
+            if (sbName) sbName.innerText = user.name;
+          }
+          if (user && user.username) {
+            localStorage.setItem('krishimitra_username', user.username);
+            const sbUser = document.getElementById('sidebarUserEmail');
+            if (sbUser) sbUser.innerText = `@${user.username}`;
+>>>>>>> 72b9483fdf8d1ae0024355b9dfc0284a68dc287a
           }
           if (user && user.photoURL) {
             const avatar = document.getElementById('dashboardProfileAvatar');
             if (avatar) avatar.src = user.photoURL;
+<<<<<<< HEAD
           }
         })
         .catch(() => {
           document.getElementById('welcomeFarmerText').innerHTML = 
             `${greetingTime}, Rajesh Patil <span class="wave-emoji">👋</span>`;
+=======
+            const sbAvatar = document.getElementById('sidebarAvatar');
+            if (sbAvatar) sbAvatar.src = user.photoURL;
+          }
+        })
+        .catch(() => {
+          const savedName = localStorage.getItem('krishimitra_user_name') || 'Farmer';
+          document.getElementById('welcomeFarmerText').innerHTML = 
+            `${greetingTime}, ${savedName} <span class="wave-emoji">👋</span>`;
+>>>>>>> 72b9483fdf8d1ae0024355b9dfc0284a68dc287a
         });
     }
 

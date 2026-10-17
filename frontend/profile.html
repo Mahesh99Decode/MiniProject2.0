@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+<<<<<<< HEAD
 
   <meta charset="UTF-8">
 
@@ -14,10 +15,29 @@
 
 
 
+=======
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmer Profile & Kisan Digital ID | KrishiMitra AI</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/animation.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="stylesheet" href="css/profile.css">
+>>>>>>> 72b9483fdf8d1ae0024355b9dfc0284a68dc287a
 </head>
 
 <body>
 
+<<<<<<< HEAD
   <!-- SIDEBAR -->
 
   <div id="sidebar"></div>
@@ -229,10 +249,263 @@
 
       </div>
 
+=======
+  <!-- ASYNCHRONOUS SIDEBAR INJECTION -->
+  <div id="sidebar"></div>
+
+  <!-- MAIN DASHBOARD CONTENT -->
+  <main class="dashboard-main">
+
+    <!-- TOP HEADER RIBBON -->
+    <header class="dashboard-hero-ribbon fade-in">
+      <div class="hero-greeting-group">
+        <h2>
+          <span>👤</span> Farmer Digital Profile & Agristack ID
+        </h2>
+        <div class="hero-subtitle-row">
+          <span class="farm-badge-pill" style="background: rgba(34,197,94,0.12); color: #166534; font-weight: 600;">
+            🟢 Agristack Verified • MongoDB Synchronized
+          </span>
+          <span id="memberSinceDisplay" style="font-size: 0.85rem; color: #64748B;">
+            Active since 2024
+          </span>
+        </div>
+      </div>
+
+      <div class="hero-actions-group">
+        <a href="dashboard.html" class="quick-action-pill-btn" style="background: white; color: var(--krishi-forest); border: 1.5px solid rgba(45,106,79,0.3); padding: 8px 18px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 6px;">
+          <span>📊</span> Dashboard
+        </a>
+      </div>
+    </header>
+
+    <!-- 1. HERO COVER BANNER & FARMER PROFILE HEADER -->
+    <section class="fade-in">
+      <div class="profile-hero-banner"></div>
+
+      <div class="profile-card-main">
+        <!-- Floating Avatar & Action Buttons Row -->
+        <div class="profile-floating-row">
+          
+          <div style="display: flex; align-items: flex-end; gap: 24px; flex-wrap: wrap;">
+            <!-- Avatar with Upload Trigger -->
+            <div class="profile-avatar-container" onclick="document.getElementById('profileAvatarFileInput').click()" title="Click to upload profile photo">
+              <img
+                src="assets/images/farmer-avatar.png"
+                alt="Farmer Avatar"
+                class="profile-avatar-img"
+                id="profileAvatarImg"
+              >
+              <div class="profile-avatar-badge" title="Aadhaar & ICAR Verified">
+                ✓
+              </div>
+              <div class="profile-avatar-upload-overlay">
+                <span>📷</span>
+                <span>Change</span>
+              </div>
+              <input type="file" id="profileAvatarFileInput" accept="image/*" style="display: none;">
+            </div>
+
+            <!-- Farmer Name, Username & Location -->
+            <div class="farmer-header-info">
+              <h2>
+                <span id="farmerNameDisplay">Rajesh Patil</span>
+                <input type="text" id="farmerNameInput" class="profile-field-input" style="display: none; font-size: 1.3rem; font-weight: 700; width: 280px;" placeholder="Full Name">
+                <span class="meta-chip verified-badge" style="font-size: 0.76rem; padding: 4px 10px;">
+                  🛡️ Kisan Verified
+                </span>
+              </h2>
+
+              <div class="farmer-tagline">
+                <span id="farmerUsernameDisplay" style="font-weight: 700; color: #2D6A4F;">@rajesh_patil</span>
+                <span>•</span>
+                <span id="farmerLocationDisplay">📍 Nashik, Maharashtra</span>
+                <input type="text" id="farmerLocationInput" class="profile-field-input" style="display: none; font-size: 0.9rem; width: 220px;" placeholder="District, State">
+              </div>
+
+              <div class="farmer-meta-chips">
+                <span class="meta-chip">📧 <span id="farmerEmailDisplay">rajesh@krishimitra.org</span></span>
+                <span class="meta-chip">📞 <span id="farmerPhoneDisplay">+91 98765 43210</span></span>
+                <input type="tel" id="farmerPhoneInput" class="profile-field-input" style="display: none; width: 170px;" placeholder="10-digit Phone">
+                <span class="meta-chip" style="background: rgba(245,158,11,0.12); color: #B45309; border-color: rgba(245,158,11,0.3);">🌾 Rabi & Kharif Grower</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Profile Actions (Edit & Sign Out) -->
+          <div class="profile-action-buttons">
+            <button type="button" id="editProfileBtn" class="btn-edit-toggle">
+              <span>✏️</span> Edit Profile
+            </button>
+            <button type="button" onclick="handleGlobalSignOut()" class="btn-signout-danger">
+              <span>🚪</span> Sign Out
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. KISAN DIGITAL SMART CARD & OVERVIEW -->
+    <section class="dashboard-grid" style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 24px; margin-bottom: 24px;">
+
+      <!-- SMART KISAN DIGITAL AGRISTACK CARD -->
+      <div class="kisan-smart-card fade-in">
+        <div class="kisan-card-top">
+          <div class="kisan-card-brand">
+            <div style="font-size: 2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">🌾</div>
+            <div>
+              <h4>GOVERNMENT OF INDIA • PM-KISAN</h4>
+              <p>Digital Agriculture Registry & Smart Agristack ID</p>
+            </div>
+          </div>
+          <div class="kisan-chip-graphic"></div>
+        </div>
+
+        <div class="kisan-card-number" id="kisanCardNumber">
+          KA-2026-MH-4409
+        </div>
+
+        <div class="kisan-card-details-grid">
+          <div class="kisan-card-detail-item">
+            <p>Cardholder</p>
+            <h5 id="kisanCardHolder">RAJESH PATIL</h5>
+          </div>
+          <div class="kisan-card-detail-item">
+            <p>Land Registered</p>
+            <h5 id="kisanCardLand">12.5 ACRES</h5>
+          </div>
+          <div class="kisan-card-detail-item">
+            <p>Primary Crop</p>
+            <h5 id="kisanCardCrop">WHEAT (HD-2967)</h5>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI AGRO PERFORMANCE MINI STATS -->
+      <div class="glass-card dashboard-widget ai-glow fade-in" style="margin: 0;">
+        <div class="widget-header">
+          <h3><span>⚡</span> Farm AI Efficiency Index</h3>
+          <span class="farm-badge-pill" style="background: rgba(34,197,94,0.12); color: #166534;">Optimal</span>
+        </div>
+
+        <div class="agro-stats-grid">
+          <div class="agro-stat-card">
+            <div class="agro-stat-icon">📈</div>
+            <div class="agro-stat-value">92%</div>
+            <div class="agro-stat-label">Yield Index</div>
+          </div>
+          <div class="agro-stat-card">
+            <div class="agro-stat-icon">💧</div>
+            <div class="agro-stat-value">38%</div>
+            <div class="agro-stat-label">Water Saved</div>
+          </div>
+          <div class="agro-stat-card">
+            <div class="agro-stat-icon">🌱</div>
+            <div class="agro-stat-value">8.4</div>
+            <div class="agro-stat-label">Soil Health Score</div>
+          </div>
+          <div class="agro-stat-card">
+            <div class="agro-stat-icon">🛡️</div>
+            <div class="agro-stat-value">96%</div>
+            <div class="agro-stat-label">Crop Safety</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 3. DETAILED FARM TELEMETRY & AGRONOMIC SPECS -->
+    <section class="profile-section-card fade-in">
+      <div class="profile-section-title">
+        <h3><span>🚜</span> Farm Land & Agronomic Specifications</h3>
+        <span class="farm-badge-pill">Plot Registry #44/2</span>
+      </div>
+
+      <div class="profile-fields-grid">
+        <!-- Landholding -->
+        <div class="profile-field-box">
+          <div class="profile-field-label"><span>📐</span> Total Cultivated Land</div>
+          <div class="profile-field-value" id="farmLandDisplay">12.5 Acres</div>
+          <input type="text" id="farmLandInput" class="profile-field-input" style="display: none;" placeholder="e.g. 12.5 Acres">
+        </div>
+
+        <!-- Main Crop -->
+        <div class="profile-field-box">
+          <div class="profile-field-label"><span>🌾</span> Primary Kharif / Rabi Crop</div>
+          <div class="profile-field-value" id="farmCropDisplay">Wheat (HD-2967)</div>
+          <input type="text" id="farmCropInput" class="profile-field-input" style="display: none;" placeholder="e.g. Wheat (HD-2967)">
+        </div>
+
+        <!-- Irrigation Type -->
+        <div class="profile-field-box">
+          <div class="profile-field-label"><span>💧</span> Irrigation Infrastructure</div>
+          <div class="profile-field-value" id="farmIrrigationDisplay">Drip Irrigation</div>
+          <input type="text" id="farmIrrigationInput" class="profile-field-input" style="display: none;" placeholder="e.g. Drip Irrigation">
+        </div>
+
+        <!-- Farming Experience -->
+        <div class="profile-field-box">
+          <div class="profile-field-label"><span>⏳</span> Generational Experience</div>
+          <div class="profile-field-value" id="farmExperienceDisplay">14 Years</div>
+          <input type="text" id="farmExperienceInput" class="profile-field-input" style="display: none;" placeholder="e.g. 14 Years">
+        </div>
+
+        <!-- Soil Classification -->
+        <div class="profile-field-box">
+          <div class="profile-field-label"><span>🧪</span> Soil Classification</div>
+          <div class="profile-field-value" id="soilTypeDisplay">Black Cotton Loam (Regur)</div>
+        </div>
+
+        <!-- Water Source -->
+        <div class="profile-field-box">
+          <div class="profile-field-label"><span>🌊</span> Primary Water Source</div>
+          <div class="profile-field-value" id="waterSourceDisplay">Tube Well (350 ft) + Canal Sump</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. ACCOUNT SECURITY & DANGER ZONE SIGN OUT -->
+    <section class="profile-section-card fade-in">
+      <div class="profile-section-title">
+        <h3><span>🔐</span> Account Security & Session Management</h3>
+        <span class="farm-badge-pill" style="background: rgba(34,197,94,0.12); color: #166534;">MongoDB Encrypted</span>
+      </div>
+
+      <div class="profile-fields-grid" style="margin-bottom: 24px;">
+        <div class="profile-field-box">
+          <div class="profile-field-label"><span>🆔</span> MongoDB Username</div>
+          <div class="profile-field-value" style="font-family: monospace;" id="secUsernameDisplay">rajesh_patil</div>
+        </div>
+        <div class="profile-field-box">
+          <div class="profile-field-label"><span>🔑</span> Password Protection</div>
+          <div class="profile-field-value" style="color: #166534;">•••••••• (Bcrypt Salted)</div>
+        </div>
+        <div class="profile-field-box">
+          <div class="profile-field-label"><span>🌐</span> Advisory Language</div>
+          <div class="profile-field-value">English • हिन्दी • मराठी</div>
+        </div>
+      </div>
+
+      <!-- PROMINENT DANGER ZONE / SIGN OUT BOX -->
+      <div class="danger-zone-card">
+        <div class="danger-zone-text">
+          <h4><span>🚪</span> Sign Out of KrishiMitra Session</h4>
+          <p>
+            Securely end your farming session on this device. Your farm soil records, crop simulations, and diagnostic history remain safely saved in your MongoDB account.
+          </p>
+        </div>
+
+        <button type="button" onclick="handleGlobalSignOut()" class="btn-signout-danger" style="padding: 12px 28px; font-size: 0.95rem;">
+          <span>🚪</span> Sign Out Account
+        </button>
+      </div>
+>>>>>>> 72b9483fdf8d1ae0024355b9dfc0284a68dc287a
     </section>
 
   </main>
 
+<<<<<<< HEAD
   
   <!-- JS -->
   
@@ -284,6 +557,70 @@
   initializePage();
 
 </script>
+=======
+  <!-- ============================================
+       SIGN OUT CONFIRMATION MODAL
+  ============================================ -->
+  <div class="signout-modal-backdrop" id="signOutModal">
+    <div class="signout-modal-content">
+      <div class="signout-modal-icon">
+        🚪
+      </div>
+      <h3>Sign Out of KrishiMitra AI?</h3>
+      <p>
+        Are you sure you want to end your current session? You will need your username or email and password to log in again.
+      </p>
+
+      <div class="signout-modal-actions">
+        <button type="button" class="btn-modal-cancel" onclick="closeSignOutModal()">
+          Cancel
+        </button>
+        <button type="button" class="btn-modal-confirm" onclick="executeSignOut()">
+          Yes, Sign Out
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ASYNCHRONOUS CHATBOT WIDGET -->
+  <div id="chatbotComponent"></div>
+
+  <!-- JAVASCRIPT MODULES -->
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/profile.js"></script>
+  <script src="js/chatbot.js"></script>
+
+  <!-- ASYNC COMPONENT LOADER -->
+  <script>
+    async function loadComponent(id, file) {
+      try {
+        const response = await fetch(file);
+        if (response.ok) {
+          const data = await response.text();
+          const target = document.getElementById(id);
+          if (target) target.innerHTML = data;
+        }
+      } catch (err) {
+        console.warn(`Could not load ${file}:`, err.message);
+      }
+    }
+
+    async function initializeProfilePage() {
+      // 1. Load Sidebar
+      await loadComponent("sidebar", "components/sidebar.html");
+
+      // 2. Load Chatbot Widget
+      await loadComponent("chatbotComponent", "components/chatbotWidget.html");
+
+      if (typeof initializeChatbot === "function") {
+        initializeChatbot();
+      }
+    }
+
+    initializeProfilePage();
+  </script>
+>>>>>>> 72b9483fdf8d1ae0024355b9dfc0284a68dc287a
 
 </body>
 

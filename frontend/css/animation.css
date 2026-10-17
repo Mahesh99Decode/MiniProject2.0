@@ -1,4 +1,5 @@
 /* =========================================
+<<<<<<< HEAD
    KISAN MITRA — ANIMATIONS
    Subtle, performance-focused transitions
 ========================================= */
@@ -159,5 +160,165 @@
   .scanner-beam-line {
     animation: none !important;
     display: none;
+=======
+   KRISHIMITRA AI — ANIMATIONS
+========================================= */
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0 rgba(76,175,80,0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 25px rgba(76,175,80,0.5);
+  }
+
+  100% {
+    box-shadow: 0 0 0 rgba(76,175,80,0.4);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFade {
+
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-content,
+.hero-visual {
+  animation: heroFade 1s ease forwards;
+}
+
+.float-animation {
+  animation: floatUp 4s ease-in-out infinite;
+}
+
+.fade-in {
+  animation: fadeIn 0.7s ease forwards;
+}
+
+.pulse-glow {
+  animation: pulseGlow 2.5s infinite;
+}
+
+/* =========================================
+   FLOAT ANIMATION
+========================================= */
+
+@keyframes floatUpDown {
+
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* =========================================
+   SHIMMER EFFECT
+========================================= */
+
+@keyframes shimmer {
+
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* =========================================
+   SCROLL REVEAL
+========================================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================
+   GLOW PULSE
+========================================= */
+
+@keyframes glowPulse {
+
+  0% {
+    box-shadow:
+      0 0 0 rgba(76,175,80,0.4);
+  }
+
+  50% {
+    box-shadow:
+      0 0 30px rgba(76,175,80,0.35);
+  }
+
+  100% {
+    box-shadow:
+      0 0 0 rgba(76,175,80,0.4);
+  }
+}
+
+/* =========================================
+   AI ROTATION
+========================================= */
+
+@keyframes aiRotate {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+>>>>>>> 72b9483fdf8d1ae0024355b9dfc0284a68dc287a
   }
 }
