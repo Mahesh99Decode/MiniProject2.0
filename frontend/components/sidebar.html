@@ -1,59 +1,111 @@
-<aside class="dashboard-sidebar glass-card">
+<aside class="dashboard-sidebar" id="mainSidebar" aria-label="Main navigation">
 
-  <!-- LOGO -->
-
-  <div class="sidebar-logo">
-
+  <!-- BRAND -->
+  <div class="sidebar-brand">
     <img
       src="assets/logos/logo.png"
-      alt="Logo"
-      class="logo"
+      alt="Kisan Mitra AI"
+      class="sidebar-logo-img"
     >
-
-    <div>
-
-      <h3>KrishiMitra AI</h3>
-
-      <p>AI Farming System</p>
-
+    <div class="sidebar-brand-text">
+      <span class="sidebar-brand-name">KrishiMitra</span>
+      <span class="sidebar-brand-sub">AI Farming System</span>
     </div>
-
   </div>
 
   <!-- NAVIGATION -->
+  <nav class="sidebar-nav" aria-label="Dashboard navigation">
 
-  <nav class="sidebar-nav">
+    <span class="sidebar-section-label">Main</span>
 
-    <a href="dashboard.html">
-      📊 Dashboard
+    <a href="dashboard.html" class="sidebar-link" data-page="dashboard">
+      <span class="sidebar-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      </span>
+      <span class="sidebar-label">Dashboard</span>
     </a>
 
-    <a href="recommendation.html">
-      🌱 Recommendations
+    <a href="recommendation.html" class="sidebar-link" data-page="recommendation">
+      <span class="sidebar-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 8v4l2 2"/></svg>
+      </span>
+      <span class="sidebar-label">Crop Advisory</span>
     </a>
 
-    <a href="monitoring.html">
-      📷 Monitoring
+    <a href="monitoring.html" class="sidebar-link" data-page="monitoring">
+      <span class="sidebar-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      <span class="sidebar-label">Disease Detection</span>
     </a>
 
-    <a href="simulation.html">
-      🧠 Simulation
+    <a href="simulation.html" class="sidebar-link" data-page="simulation">
+      <span class="sidebar-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </span>
+      <span class="sidebar-label">Yield Predictor</span>
     </a>
 
-    <a href="schemes.html">
-      🏛️ Schemes
+    <span class="sidebar-section-label">Information</span>
+
+    <a href="schemes.html" class="sidebar-link" data-page="schemes">
+      <span class="sidebar-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      </span>
+      <span class="sidebar-label">Govt. Schemes</span>
     </a>
 
-    <a href="alerts.html">
-      🚨 Alerts
+    <a href="alerts.html" class="sidebar-link" data-page="alerts">
+      <span class="sidebar-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      </span>
+      <span class="sidebar-label">Smart Alerts</span>
+      <span class="sidebar-badge" aria-label="3 unread alerts">3</span>
     </a>
 
-    <a href="profile.html">
-      👤 Profile
+    <span class="sidebar-section-label">Account</span>
+
+    <a href="profile.html" class="sidebar-link" data-page="profile">
+      <span class="sidebar-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </span>
+      <span class="sidebar-label">Profile</span>
     </a>
 
   </nav>
 
-
+  <!-- AI STATUS CARD -->
+  <div class="sidebar-ai-status">
+    <div class="sidebar-ai-dot" aria-hidden="true">
+      <span class="pulse-dot"></span>
+    </div>
+    <div class="sidebar-ai-info">
+      <span class="sidebar-ai-title">Krishi-AI Sentinel</span>
+      <span class="sidebar-ai-sub">Active & Monitoring</span>
+    </div>
+  </div>
 
 </aside>
+
+<!-- MOBILE OVERLAY -->
+<div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
+<script>
+  /* — Active link detection — */
+  (function () {
+    const page = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      const key = link.getAttribute('data-page');
+      if (page.includes(key)) link.classList.add('active');
+    });
+  })();
+
+  /* — Mobile overlay close — */
+  const overlay = document.getElementById('sidebarOverlay');
+  if (overlay) {
+    overlay.addEventListener('click', function () {
+      document.getElementById('mainSidebar').classList.remove('open');
+      overlay.classList.remove('active');
+    });
+  }
+</script>
